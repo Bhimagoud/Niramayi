@@ -8,9 +8,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; color: #1a2340; background: #fff; }
-    a { text-decoration: none; color: inherit; }
+    html { scroll-behavior: smooth; cursor: none; }
+    body { font-family: 'Inter', sans-serif; color: #1a2340; background: #fff; overflow-x: hidden; }
+    a, button, select { cursor: none; }
+    
+    /* CUSTOM CURSOR */
+    .custom-cursor {
+      position: fixed; top: 0; left: 0; width: 28px; height: 28px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e63946' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z'/%3E%3C/svg%3E");
+      background-size: cover; pointer-events: none; z-index: 999999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, transform 0.2s;
+    }
+    .custom-cursor.hover {
+      transform: translate(-50%, -50%) scale(1.3);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230a6eb4' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z'/%3E%3C/svg%3E");
+    }
+    @media (hover: none) and (pointer: coarse), (max-width: 768px) {
+      * { cursor: auto !important; }
+      html, a, button, select { cursor: auto !important; }
+      .custom-cursor { display: none !important; }
+    }
     img { max-width: 100%; display: block; }
     svg { display: inline-block; flex-shrink: 0; }
 
@@ -150,6 +168,26 @@
     .facility-card:hover svg { stroke: #fff; }
     .fc-icon { width: 48px; height: 48px; background: rgba(10,110,180,0.08); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; transition: background 0.2s; }
     .facility-card p { font-size: 0.86rem; font-weight: 600; }
+
+    /* DEPARTMENTS (Image Grid) */
+    .dept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 30px; }
+    .dept-card { 
+      position: relative; border-radius: 8px; overflow: hidden; height: 230px; 
+      background-size: cover; background-position: center; transition: transform 0.3s;
+    }
+    .dept-card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.15); z-index: 5; }
+    .dept-card::before { 
+      content: ''; position: absolute; inset: 0; 
+      background: linear-gradient(to top, rgba(58, 64, 137, 0.95) 0%, rgba(58, 64, 137, 0.6) 30%, rgba(58, 64, 137, 0) 70%);
+      transition: opacity 0.3s;
+    }
+    .dept-card:hover::before { opacity: 0.8; }
+    .dept-card .dept-name {
+      position: absolute; bottom: 18px; right: 18px; left: 18px;
+      color: #ffffff; font-weight: 700; font-size: 0.95rem; line-height: 1.3;
+      text-align: right; z-index: 2;
+    }
+
     .preventive-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .preventive-card { background: linear-gradient(135deg, #e8f4fd, #ddf2f8); border-radius: 12px; padding: 24px; border-left: 4px solid var(--primary); }
     .preventive-card .pc-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
@@ -301,6 +339,9 @@
   </style>
 </head>
 <body>
+
+<!-- CUSTOM CURSOR -->
+<div class="custom-cursor"></div>
 
 <!-- TOP BAR -->
 <div class="topbar">
@@ -1332,6 +1373,22 @@ function handleForm(e) {
   alert('Thank you! Your appointment request has been received.\nWe will contact you shortly.\n\nFor immediate assistance: ' + ph);
   e.target.reset();
 }
+
+// ── CUSTOM CURSOR LOGIC ──
+document.addEventListener('DOMContentLoaded', () => {
+  const cursor = document.querySelector('.custom-cursor');
+  if(cursor) {
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+    const interactiveEls = document.querySelectorAll('a, button, input, select, textarea, .why-card, .dept-card, .fac-card');
+    interactiveEls.forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+  }
+});
 </script>
 </body>
 </html>
