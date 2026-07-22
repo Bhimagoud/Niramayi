@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Admin CMS – Sevasadan Niramay</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:#060d1a;color:#c8d8e8;min-height:100vh;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+:root{
+  --blue:#2563eb;--blue-h:#1d4ed8;--blue-soft:rgba(37,99,235,.12);
+  --teal:#06b6d4;--teal-soft:rgba(6,182,212,.1);
+  --green:#16a34a;--green-soft:rgba(22,163,74,.12);
+  --red:#dc2626;--red-soft:rgba(220,38,38,.1);
+  --amber:#d97706;--amber-soft:rgba(217,119,6,.1);
+  --card:#0c1829;--card2:#0f1f35;
+  --border:#132240;--border2:#1a2d4a;
+  --text:#c8d8e8;--text2:#7a9bb5;--text3:#3d5f7d;
+  --sidebar:220px;
+}
+
+/* ═══════════════ LAYOUT ═══════════════ */
+#login-screen{position:fixed;inset:0;background:linear-gradient(135deg,#020810 0%,#060d1a 50%,#08152a 100%);display:flex;align-items:center;justify-content:center;z-index:9999}
+#app{display:none;min-height:100vh}
+.layout{display:flex;min-height:100vh}
+
+/* ═══════════════ SIDEBAR ═══════════════ */
+.sidebar{
+  width:var(--sidebar);flex-shrink:0;background:#080f1e;
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+  position:fixed;top:0;left:0;height:100vh;z-index:50;
+  transition:transform .3s ease;
+}
+.sidebar-logo{
+  padding:20px 18px 16px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;
+}
+.sidebar-logo .icon{
+  width:36px;height:36px;background:var(--blue);border-radius:9px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.sidebar-logo .brand{font-size:.85rem;font-weight:800;color:#fff;line-height:1.2}
+.sidebar-logo .sub{font-size:.65rem;color:var(--text3);text-transform:uppercase;letter-spacing:.06em}
+.sidebar-nav{flex:1;padding:12px 8px;overflow-y:auto;display:flex;flex-direction:column;gap:2px}
+.nav-item{
+  display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;
+  font-size:.84rem;font-weight:500;color:var(--text2);cursor:pointer;
+  transition:all .18s ease;white-space:nowrap;
+}
+.nav-item:hover{background:var(--blue-soft);color:#e0eaf8}
+.nav-item.active{background:var(--blue);color:#fff;font-weight:700}
+.nav-item svg{flex-shrink:0;opacity:.75}
+.nav-item.active svg{opacity:1}
+.nav-section-label{
+  font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--text3);padding:12px 12px 4px;margin-top:6px;
+}
+.sidebar-footer{padding:14px 10px;border-top:1px solid var(--border)}
+.btn-view-site{
+  display:flex;align-items:center;gap:8px;width:100%;padding:9px 12px;
+  border-radius:8px;font-size:.8rem;font-weight:600;color:var(--teal);
+  background:var(--teal-soft);border:1px solid rgba(6,182,212,.2);
+  cursor:pointer;font-family:inherit;transition:all .2s;margin-bottom:6px;
+}
+.btn-view-site:hover{background:rgba(6,182,212,.18)}
+.btn-logout{
+  display:flex;align-items:center;gap:8px;width:100%;padding:9px 12px;
+  border-radius:8px;font-size:.8rem;font-weight:600;color:#f87171;
+  background:var(--red-soft);border:1px solid rgba(220,38,38,.2);
+  cursor:pointer;font-family:inherit;transition:all .2s;
+}
+.btn-logout:hover{background:rgba(220,38,38,.18)}
+
+/* ═══════════════ MAIN CONTENT ═══════════════ */
+.main-wrap{flex:1;margin-left:var(--sidebar);display:flex;flex-direction:column;min-height:100vh}
+.topbar-admin{
+  background:#080f1e;border-bottom:1px solid var(--border);
+  padding:0 28px;height:60px;display:flex;align-items:center;
+  justify-content:space-between;position:sticky;top:0;z-index:40;
+}
+.topbar-left{display:flex;align-items:center;gap:14px}
+.page-title{font-size:1.05rem;font-weight:800;color:#e8f2ff}
+.breadcrumb{font-size:.75rem;color:var(--text3);display:flex;align-items:center;gap:5px}
+.save-status{
+  display:flex;align-items:center;gap:6px;font-size:.76rem;font-weight:600;
+  color:var(--green);background:var(--green-soft);padding:5px 12px;border-radius:20px;
+}
+.save-status.saving{color:var(--amber)}
+.save-status.unsaved{color:#f87171;background:var(--red-soft)}
+.content-area{flex:1;padding:28px}
+
+/* ═══════════════ LOGIN ═══════════════ */
+.login-card{
+  background:#0c1829;border:1px solid var(--border);border-radius:20px;
+  padding:48px 44px;width:100%;max-width:400px;
+  box-shadow:0 40px 80px rgba(0,0,0,.6);
+  animation:fadeUp .4s ease;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.login-logo-row{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.login-icon{width:46px;height:46px;background:var(--blue);border-radius:12px;display:flex;align-items:center;justify-content:center}
+.login-title{font-size:1.5rem;font-weight:900;color:#fff;margin-bottom:5px}
+.login-sub{color:var(--text2);font-size:.85rem;margin-bottom:24px}
+.field-group{margin-bottom:16px}
+.field-group label{display:block;font-size:.76rem;font-weight:700;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em}
+.field-group input{
+  width:100%;background:#060d1a;border:1.5px solid var(--border);
+  border-radius:9px;padding:11px 14px;font-size:.9rem;color:#e0eaf8;
+  font-family:inherit;outline:none;transition:border .2s;
+}
+.field-group input:focus{border-color:var(--blue)}
+.btn-login{
+  width:100%;background:var(--blue);color:#fff;border:none;border-radius:9px;
+  padding:12px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:inherit;
+  transition:background .2s;display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-login:hover{background:var(--blue-h)}
+.login-err{
+  background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.3);
+  border-radius:8px;padding:10px 14px;font-size:.82rem;color:#fca5a5;
+  margin-bottom:14px;display:none;
+}
+.login-hint{margin-top:16px;text-align:center;font-size:.75rem;color:var(--text3)}
+.login-hint code{color:var(--text2)}
+
+/* ═══════════════ DASHBOARD ═══════════════ */
+.dash-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+.dash-stat{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:20px 22px;display:flex;align-items:center;gap:16px;
+}
+.dash-stat .si{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.si.blue{background:var(--blue-soft)} .si.teal{background:var(--teal-soft)}
+.si.green{background:var(--green-soft)} .si.amber{background:var(--amber-soft)}
+.dash-stat .num{font-size:1.7rem;font-weight:800;color:#fff;line-height:1}
+.dash-stat .lbl{font-size:.72rem;color:var(--text2);margin-top:3px;text-transform:uppercase;letter-spacing:.05em}
+.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.quick-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;
+}
+.quick-card h3{font-size:.9rem;font-weight:700;color:#e0eaf8;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.info-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:.83rem}
+.info-row:last-child{border-bottom:none}
+.info-row .k{color:var(--text2)}
+.info-row .v{color:#e0eaf8;font-weight:600;text-align:right;max-width:60%}
+.link-chip{
+  display:inline-flex;align-items:center;gap:5px;background:var(--blue-soft);
+  color:var(--teal);border:1px solid rgba(6,182,212,.2);padding:5px 12px;
+  border-radius:20px;font-size:.75rem;font-weight:600;cursor:pointer;
+  font-family:inherit;transition:all .2s;
+}
+.link-chip:hover{background:rgba(6,182,212,.18)}
+
+/* ═══════════════ SECTION COMMON ═══════════════ */
+.section-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;gap:16px;flex-wrap:wrap}
+.section-title{font-size:1.3rem;font-weight:800;color:#e8f2ff;display:flex;align-items:center;gap:10px}
+.section-desc{color:var(--text2);font-size:.83rem;margin-top:4px}
+.btn-primary{
+  background:var(--blue);color:#fff;border:none;border-radius:9px;
+  padding:10px 20px;font-size:.85rem;font-weight:700;cursor:pointer;
+  font-family:inherit;display:flex;align-items:center;gap:7px;transition:background .2s;white-space:nowrap;
+}
+.btn-primary:hover{background:var(--blue-h)}
+.btn-secondary{
+  background:var(--card2);color:var(--text);border:1px solid var(--border2);
+  border-radius:9px;padding:10px 18px;font-size:.85rem;font-weight:600;
+  cursor:pointer;font-family:inherit;transition:all .2s;
+}
+.btn-secondary:hover{background:#132240}
+.btn-danger{
+  background:var(--red-soft);color:#f87171;border:1px solid rgba(220,38,38,.2);
+  border-radius:7px;padding:6px 13px;font-size:.78rem;font-weight:600;
+  cursor:pointer;font-family:inherit;transition:all .2s;
+}
+.btn-danger:hover{background:rgba(220,38,38,.2)}
+.btn-edit-sm{
+  background:var(--blue-soft);color:var(--teal);border:1px solid rgba(6,182,212,.2);
+  border-radius:7px;padding:6px 13px;font-size:.78rem;font-weight:600;
+  cursor:pointer;font-family:inherit;transition:all .2s;
+}
+.btn-edit-sm:hover{background:rgba(6,182,212,.2)}
+
+/* FORMS */
+.form-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px}
+.form-card h3{font-size:.95rem;font-weight:700;color:#e0eaf8;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-grid.three{grid-template-columns:1fr 1fr 1fr}
+.form-grid.full{grid-template-columns:1fr}
+.fg{margin-bottom:0}
+.fg label{display:block;font-size:.74rem;font-weight:700;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em}
+.fg label .req{color:var(--red)}
+.fg input,.fg select,.fg textarea{
+  width:100%;background:#060d1a;border:1.5px solid var(--border);
+  border-radius:8px;padding:10px 13px;font-size:.88rem;color:#e0eaf8;
+  font-family:inherit;outline:none;transition:border .2s;
+}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--blue)}
+.fg select option{background:#060d1a}
+.fg textarea{resize:vertical;min-height:90px;line-height:1.6}
+.fg .hint{font-size:.72rem;color:var(--text3);margin-top:4px;line-height:1.4}
+.fg .char-count{font-size:.7rem;color:var(--text3);text-align:right;margin-top:3px}
+.form-sep{grid-column:1/-1;border:none;border-top:1px solid var(--border);margin:4px 0}
+.form-actions{display:flex;gap:10px;margin-top:20px;justify-content:flex-end}
+.span2{grid-column:span 2}
+
+/* TOGGLE */
+.toggle-row{display:flex;align-items:center;gap:10px}
+.tgl{position:relative;width:42px;height:23px}
+.tgl input{opacity:0;width:0;height:0}
+.tgl-slider{position:absolute;inset:0;background:#1e3050;border-radius:23px;cursor:pointer;transition:.3s}
+.tgl-slider::before{content:'';position:absolute;width:17px;height:17px;left:3px;bottom:3px;background:#4a6280;border-radius:50%;transition:.3s}
+input:checked+.tgl-slider{background:var(--green)}
+input:checked+.tgl-slider::before{background:#fff;transform:translateX(19px)}
+.tgl-lbl{font-size:.85rem;color:var(--text2)}
+
+/* ═══════════════ TABLE ═══════════════ */
+.data-table-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.dt-header{
+  display:grid;gap:0;background:#060d1a;padding:12px 20px;
+  font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--text3);border-bottom:1px solid var(--border);
+}
+.dt-row{
+  display:grid;gap:0;padding:14px 20px;border-bottom:1px solid var(--border);
+  align-items:center;transition:background .15s;
+}
+.dt-row:last-child{border-bottom:none}
+.dt-row:hover{background:#0a1525}
+.cell-num{font-size:.75rem;color:var(--text3);font-weight:700}
+.cell-info{display:flex;align-items:center;gap:11px}
+.avatar{
+  width:40px;height:40px;border-radius:9px;flex-shrink:0;overflow:hidden;
+  background:linear-gradient(135deg,var(--blue),var(--teal));
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;font-weight:700;color:#fff;
+}
+.avatar img{width:100%;height:100%;object-fit:cover;object-position:top}
+.cell-name{font-weight:700;font-size:.88rem;color:#e0eaf8}
+.cell-sub{font-size:.72rem;color:var(--text3);margin-top:2px}
+.badge-dept{
+  display:inline-flex;align-items:center;background:var(--blue-soft);color:var(--teal);
+  padding:3px 10px;border-radius:20px;font-size:.73rem;font-weight:600;
+  border:1px solid rgba(6,182,212,.15);
+}
+.badge-avail{display:inline-flex;align-items:center;gap:5px;font-size:.74rem;font-weight:600}
+.badge-avail.yes{color:var(--green)} .badge-avail.no{color:#f87171}
+.badge-avail::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+.cell-actions{display:flex;gap:7px}
+.dt-empty{text-align:center;padding:50px 20px;color:var(--text3)}
+
+/* SEARCH / FILTER */
+.table-controls{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.search-inp{
+  flex:1;min-width:180px;background:var(--card);border:1px solid var(--border);
+  border-radius:9px;padding:10px 14px 10px 38px;font-size:.85rem;color:#e0eaf8;
+  font-family:inherit;outline:none;transition:border .2s;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%233d5f7d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:12px center;
+}
+.search-inp:focus{border-color:var(--blue)}
+
+/* DEPT LIST */
+.dept-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.dept-item{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  transition:border .15s;
+}
+.dept-item:hover{border-color:var(--border2)}
+.dept-name{font-size:.88rem;font-weight:600;color:#e0eaf8;display:flex;align-items:center;gap:8px}
+.dept-order{font-size:.72rem;color:var(--text3);background:#060d1a;border:1px solid var(--border);border-radius:4px;padding:1px 6px}
+.dept-actions{display:flex;gap:6px}
+
+/* MODAL */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(5px);
+  z-index:1000;display:flex;align-items:center;justify-content:center;
+  padding:20px;opacity:0;pointer-events:none;transition:opacity .25s;
+}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{
+  background:#0c1829;border:1px solid var(--border);border-radius:20px;
+  padding:32px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;
+  transform:translateY(16px);transition:transform .25s;
+}
+.modal-overlay.open .modal{transform:none}
+.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+.modal-head h2{font-size:1.1rem;font-weight:800;color:#e8f2ff;display:flex;align-items:center;gap:9px}
+.btn-close{
+  background:#132240;color:var(--text2);border:none;width:32px;height:32px;
+  border-radius:7px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;
+  font-family:inherit;transition:background .2s;
+}
+.btn-close:hover{background:#1a2d4a}
+.modal-actions{display:flex;gap:10px;margin-top:22px}
+.modal .fg{margin-bottom:14px}
+
+/* HOURS TABLE EDITOR */
+.hours-list{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.hour-row{
+  display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:center;
+  background:#060d1a;border:1px solid var(--border);border-radius:8px;padding:10px 12px;
+}
+.hour-row input{
+  background:transparent;border:1px solid var(--border);border-radius:6px;
+  padding:6px 10px;font-size:.83rem;color:#e0eaf8;font-family:inherit;outline:none;
+  width:100%;transition:border .2s;
+}
+.hour-row input:focus{border-color:var(--blue)}
+.btn-rm-hour{
+  background:var(--red-soft);color:#f87171;border:1px solid rgba(220,38,38,.2);
+  border-radius:6px;padding:5px 9px;font-size:.78rem;cursor:pointer;font-family:inherit;
+  white-space:nowrap;transition:all .2s;
+}
+.btn-rm-hour:hover{background:rgba(220,38,38,.2)}
+.btn-add-hour{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--blue-soft);color:var(--teal);border:1px solid rgba(6,182,212,.2);
+  border-radius:7px;padding:8px 14px;font-size:.8rem;font-weight:600;
+  cursor:pointer;font-family:inherit;transition:all .2s;
+}
+.btn-add-hour:hover{background:rgba(6,182,212,.18)}
+
+/* TOAST */
+.toast-stack{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast{
+  background:#0c1829;border:1px solid var(--border);border-radius:12px;
+  padding:13px 16px;display:flex;align-items:center;gap:11px;
+  min-width:260px;box-shadow:0 8px 32px rgba(0,0,0,.5);
+  animation:toastIn .3s ease;font-size:.84rem;color:#e0eaf8;pointer-events:all;
+}
+.toast.ok{border-color:rgba(22,163,74,.4)}
+.toast.err{border-color:rgba(220,38,38,.4)}
+.toast svg{flex-shrink:0}
+@keyframes toastIn{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
+
+/* CONFIRM */
+.confirm-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(5px);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .2s}
+.confirm-overlay.open{opacity:1;pointer-events:all}
+.confirm-box{background:#0c1829;border:1px solid rgba(220,38,38,.3);border-radius:16px;padding:30px;max-width:370px;width:100%;text-align:center;transform:scale(.95);transition:transform .2s}
+.confirm-overlay.open .confirm-box{transform:none}
+.confirm-icon{width:54px;height:54px;background:var(--red-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.confirm-box h3{font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:7px}
+.confirm-box p{color:var(--text2);font-size:.84rem;margin-bottom:20px;line-height:1.6}
+.confirm-btns{display:flex;gap:8px}
+.btn-confirm-del{flex:1;background:var(--red);color:#fff;border:none;border-radius:7px;padding:10px;font-size:.88rem;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s}
+.btn-confirm-del:hover{background:#b91c1c}
+.btn-confirm-cancel{flex:1;background:#132240;color:var(--text2);border:none;border-radius:7px;padding:10px;font-size:.88rem;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s}
+.btn-confirm-cancel:hover{background:#1a2d4a}
+
+/* SCROLL STYLING */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#1a2d4a;border-radius:10px}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:none}
+  .main-wrap{margin-left:0}
+  .dash-stats{grid-template-columns:1fr 1fr}
+  .quick-grid{grid-template-columns:1fr}
+  .form-grid,.form-grid.three{grid-template-columns:1fr}
+  .span2{grid-column:span 1}
+}
+@media(max-width:600px){
+  .dash-stats{grid-template-columns:1fr}
+  .content-area{padding:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════ LOGIN ══════════════ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo-row">
+      <div class="login-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <div>
+        <div style="font-size:.85rem;font-weight:800;color:#fff">Sevasadan Niramay</div>
+        <div style="font-size:.65rem;color:var(--text3);text-transform:uppercase;letter-spacing:.06em">Admin CMS Panel</div>
+      </div>
+    </div>
+    <div class="login-title">Welcome Back</div>
+    <div class="login-sub">Sign in to manage your hospital website content.</div>
+    <div class="login-err" id="loginErr">⚠ Incorrect username or password.</div>
+    <div class="field-group">
+      <label>Username</label>
+      <input type="text" id="loginUser" placeholder="admin" autocomplete="username"/>
+    </div>
+    <div class="field-group">
+      <label>Password</label>
+      <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"/>
+    </div>
+    <button class="btn-login" onclick="doLogin()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+      Sign In
+    </button>
+    <div class="login-hint">Default: <code>admin</code> / <code>niramay@2025</code></div>
+  </div>
+</div>
+
+<!-- ══════════════ APP ══════════════ -->
+<div id="app">
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <div class="icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <div><div class="brand">Niramay CMS</div><div class="sub">Admin Panel</div></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-item active" onclick="switchSection('dashboard',this)" id="nav-dashboard">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Dashboard
+        </div>
+        <div class="nav-section-label">Content</div>
+        <div class="nav-item" onclick="switchSection('hospital',this)" id="nav-hospital">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Hospital Info
+        </div>
+        <div class="nav-item" onclick="switchSection('contact',this)" id="nav-contact">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34a2 2 0 0 1 2-2.18H7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Contact & Hours
+        </div>
+        <div class="nav-item" onclick="switchSection('departments',this)" id="nav-departments">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          Departments
+        </div>
+        <div class="nav-item" onclick="switchSection('doctors',this)" id="nav-doctors">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Doctors
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="index.html" target="_blank" class="btn-view-site">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          View Live Site
+        </a>
+        <button class="btn-logout" onclick="doLogout()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN WRAP -->
+    <div class="main-wrap">
+      <div class="topbar-admin">
+        <div class="topbar-left">
+          <div>
+            <div class="page-title" id="topTitle">Dashboard</div>
+            <div class="breadcrumb">Niramay CMS <span style="opacity:.4">›</span> <span id="topCrumb">Overview</span></div>
+          </div>
+        </div>
+        <div id="saveStatus" class="save-status" style="opacity:0">● All changes saved</div>
+      </div>
+
+      <div class="content-area">
+
+        <!-- ── DASHBOARD ── -->
+        <div class="section" id="sec-dashboard">
+          <div class="dash-stats">
+            <div class="dash-stat"><div class="si blue"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><div class="num" id="dTotalDoctors">0</div><div class="lbl">Total Doctors</div></div></div>
+            <div class="dash-stat"><div class="si teal"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div><div class="num" id="dTotalDepts">0</div><div class="lbl">Departments</div></div></div>
+            <div class="dash-stat"><div class="si green"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="num" id="dAvailDoctors">0</div><div class="lbl">Available Now</div></div></div>
+            <div class="dash-stat"><div class="si amber"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="num" id="dLastSaved">—</div><div class="lbl">Last Saved</div></div></div>
+          </div>
+          <div class="quick-grid">
+            <div class="quick-card">
+              <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34a2 2 0 0 1 2-2.18H7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Contact Snapshot</h3>
+              <div class="info-row"><span class="k">Phone</span><span class="v" id="dPhone">—</span></div>
+              <div class="info-row"><span class="k">Email</span><span class="v" id="dEmail">—</span></div>
+              <div class="info-row"><span class="k">Address</span><span class="v" id="dAddress">—</span></div>
+            </div>
+            <div class="quick-card">
+              <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Quick Actions</h3>
+              <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px">
+                <button class="link-chip" style="justify-content:flex-start;gap:8px" onclick="switchSection('doctors',document.getElementById('nav-doctors'))">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Add a New Doctor
+                </button>
+                <button class="link-chip" style="justify-content:flex-start;gap:8px" onclick="switchSection('contact',document.getElementById('nav-contact'))">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Update Phone Number
+                </button>
+                <button class="link-chip" style="justify-content:flex-start;gap:8px" onclick="switchSection('departments',document.getElementById('nav-departments'))">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Add Department
+                </button>
+                <a href="index.html" target="_blank" class="link-chip" style="justify-content:flex-start;gap:8px">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Preview Live Website
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── HOSPITAL INFO ── -->
+        <div class="section" id="sec-hospital" style="display:none">
+          <div class="section-header">
+            <div><div class="section-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Hospital Information</div><div class="section-desc">Update the hospital name, hero text, about section, mission and vision.</div></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:20px">
+
+            <div class="form-card">
+              <h3><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg> Branding</h3>
+              <div class="form-grid">
+                <div class="fg"><label>Hospital Name <span class="req">*</span></label><input type="text" id="h_name" placeholder="Sevasadan Niramay Pvt. Ltd."/></div>
+                <div class="fg"><label>Tagline (Navbar)</label><input type="text" id="h_tagline" placeholder="Pvt. Ltd. — Ichalkaranji"/></div>
+                <div class="fg span2"><label>Hero Badge Text</label><input type="text" id="h_badge" placeholder="Trusted Healthcare in Ichalkaranji"/></div>
+              </div>
+            </div>
+
+            <div class="form-card">
+              <h3><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Hero Section</h3>
+              <div class="form-grid">
+                <div class="fg"><label>Hero Title (line 1)</label><input type="text" id="h_heroTitle" placeholder="Your Health is"/></div>
+                <div class="fg"><label>Hero Title Highlight (line 2)</label><input type="text" id="h_heroHL" placeholder="Our Responsibility"/></div>
+                <div class="fg span2"><label>Hero Description</label><textarea id="h_heroDesc" rows="3" placeholder="Describe your hospital in 2-3 sentences…"></textarea></div>
+              </div>
+              <div style="margin-top:16px"><div style="font-size:.75rem;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">Hero Stats (4 boxes)</div>
+              <div class="form-grid form-grid--four" style="grid-template-columns:repeat(4,1fr);gap:10px" id="heroStatsGrid"></div></div>
+            </div>
+
+            <div class="form-card">
+              <h3><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg> About Section</h3>
+              <div class="form-grid form-grid.full" style="grid-template-columns:1fr">
+                <div class="fg"><label>Paragraph 1</label><textarea id="h_about1" rows="4"></textarea></div>
+                <div class="fg"><label>Paragraph 2</label><textarea id="h_about2" rows="3"></textarea></div>
+              </div>
+            </div>
+
+            <div class="form-card">
+              <h3><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg> Mission &amp; Vision</h3>
+              <div class="form-grid">
+                <div class="fg"><label>Mission Statement</label><textarea id="h_mission" rows="4"></textarea></div>
+                <div class="fg"><label>Vision Statement</label><textarea id="h_vision" rows="4"></textarea></div>
+              </div>
+            </div>
+
+            <div style="display:flex;justify-content:flex-end;gap:10px">
+              <button class="btn-secondary" onclick="loadHospitalForm()">Reset</button>
+              <button class="btn-primary" onclick="saveHospital()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                Save Hospital Info
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── CONTACT & HOURS ── -->
+        <div class="section" id="sec-contact" style="display:none">
+          <div class="section-header">
+            <div><div class="section-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34a2 2 0 0 1 2-2.18H7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Contact &amp; Hours</div><div class="section-desc">Update phone numbers, email, address, and working hours shown across the website.</div></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:20px">
+            <div class="form-card">
+              <h3><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34a2 2 0 0 1 2-2.18H7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Phone Numbers</h3>
+              <div class="form-grid">
+                <div class="fg"><label>Main / Emergency Phone <span class="req">*</span></label><input type="tel" id="c_phone" placeholder="+91 77969 04008"/><div class="hint">This appears in the topbar, navbar, hero, and footer.</div></div>
+                <div class="fg"><label>WhatsApp Number (digits only)</label><input type="text" id="c_whatsapp" placeholder="917796904008"/><div class="hint">Used for WhatsApp chat links. Include country code, no +.</div></div>
+              </div>
+            </div>
+            <div class="form-card">
+              <h3><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Email &amp; Address</h3>
+              <div class="form-grid">
+                <div class="fg"><label>Main Email</label><input type="email" id="c_email" placeholder="snpl00000@gmail.com"/></div>
+                <div class="fg"><label>HR / Recruitment Email</label><input type="email" id="c_hrdEmail" placeholder="hrd@hospital.com"/></div>
+                <div class="fg span2"><label>Address</label><input type="text" id="c_address" placeholder="Ichalkaranji, Maharashtra, India"/></div>
+              </div>
+            </div>
+            <div class="form-card">
+              <h3><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Working Hours</h3>
+              <div class="hours-list" id="hoursList"></div>
+              <button class="btn-add-hour" onclick="addHourRow()">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Add Row
+              </button>
+            </div>
+            <div style="display:flex;justify-content:flex-end;gap:10px">
+              <button class="btn-secondary" onclick="loadContactForm()">Reset</button>
+              <button class="btn-primary" onclick="saveContact()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                Save Contact Info
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── DEPARTMENTS ── -->
+        <div class="section" id="sec-departments" style="display:none">
+          <div class="section-header">
+            <div><div class="section-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Departments</div><div class="section-desc">Manage hospital departments. These appear in the appointment form and services page.</div></div>
+            <button class="btn-primary" onclick="openDeptModal()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Department
+            </button>
+          </div>
+          <div class="dept-grid" id="deptGrid"></div>
+        </div>
+
+        <!-- ── DOCTORS ── -->
+        <div class="section" id="sec-doctors" style="display:none">
+          <div class="section-header">
+            <div><div class="section-title"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Doctor Profiles</div><div class="section-desc">Add, edit, or remove doctor profiles shown on the website.</div></div>
+            <button class="btn-primary" onclick="openDoctorModal()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Add Doctor
+            </button>
+          </div>
+          <div class="table-controls">
+            <input type="text" class="search-inp" id="docSearch" placeholder="Search by name or department…" oninput="renderDoctorsTable()"/>
+            <button class="btn-secondary" onclick="exportDoctors()">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Export JSON
+            </button>
+          </div>
+          <div class="data-table-wrap">
+            <div class="dt-header" style="grid-template-columns:50px 1fr 170px 160px 110px 130px">
+              <div>#</div><div>Doctor</div><div>Department</div><div>Phone</div><div>Status</div><div>Actions</div>
+            </div>
+            <div id="doctorTableBody"></div>
+          </div>
+        </div>
+
+      </div><!-- /content-area -->
+    </div><!-- /main-wrap -->
+  </div><!-- /layout -->
+</div><!-- /app -->
+
+<!-- ══════ DEPT MODAL ══════ -->
+<div class="modal-overlay" id="deptModal" onclick="closeDeptModalBg(event)">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-head">
+      <h2 id="deptModalTitle">Add Department</h2>
+      <button class="btn-close" onclick="closeDeptModal()">✕</button>
+    </div>
+    <div class="fg" style="margin-bottom:16px">
+      <label>Department Name <span class="req">*</span></label>
+      <input type="text" id="dept_name" placeholder="e.g. Cardiology"/>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeDeptModal()">Cancel</button>
+      <button class="btn-primary" onclick="saveDept()">Save Department</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ DOCTOR MODAL ══════ -->
+<div class="modal-overlay" id="doctorModal" onclick="closeDoctorModalBg(event)">
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="docModalTitle">Add Doctor</h2>
+      <button class="btn-close" onclick="closeDoctorModal()">✕</button>
+    </div>
+    <div class="form-grid">
+      <div class="fg"><label>Full Name <span class="req">*</span></label><input type="text" id="d_name" placeholder="Dr. First Last"/></div>
+      <div class="fg"><label>Qualification</label><input type="text" id="d_qual" placeholder="MBBS, MD, MS…"/></div>
+      <div class="fg"><label>Department <span class="req">*</span></label><select id="d_dept"><option value="">Select…</option></select></div>
+      <div class="fg"><label>Phone / Consult Number</label><input type="tel" id="d_phone" placeholder="+91 XXXXX XXXXX"/></div>
+      <div class="fg span2"><label>Photo Filename</label><input type="text" id="d_photo" placeholder="Dr.Name.jpg — place file in /doctors/ folder"/></div>
+      <div class="fg span2"><label>Consultation Schedule</label><input type="text" id="d_days" placeholder="Mon, Wed, Fri — 9 AM to 2 PM"/></div>
+    </div>
+    <div style="margin-top:14px">
+      <div class="toggle-row">
+        <label class="tgl"><input type="checkbox" id="d_avail" checked/><span class="tgl-slider"></span></label>
+        <span class="tgl-lbl">Doctor is <strong id="d_availTxt">Available</strong></span>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeDoctorModal()">Cancel</button>
+      <button class="btn-primary" onclick="saveDoctor()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        Save Doctor
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ CONFIRM ══════ -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <div class="confirm-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg></div>
+    <h3>Confirm Delete</h3>
+    <p id="confirmMsg">Are you sure you want to delete this item?</p>
+    <div class="confirm-btns">
+      <button class="btn-confirm-cancel" onclick="closeConfirm()">Cancel</button>
+      <button class="btn-confirm-del" id="confirmOkBtn">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-stack" id="toastStack"></div>
+
+<script>
+// ═════════════════════════════════════════════════════════════
+//  CONFIG & DEFAULTS
+// ═════════════════════════════════════════════════════════════
+const CREDS = { user:'admin', pass:'niramay@2025' };
+const KEY = 'niramay_data_v3';
+
+const DEFAULTS = {
+  hospital:{
+    name:'Sevasadan Niramay Pvt. Ltd.',
+    tagline:'Pvt. Ltd. — Ichalkaranji',
+    badge:'Trusted Healthcare in Ichalkaranji',
+    heroTitle:'Your Health is',
+    heroHL:'Our Responsibility',
+    heroDesc:'At Sevasadan Niramay Pvt. Ltd., we deliver quality healthcare with compassion, integrity, and excellence — equipped with modern facilities and a dedicated medical team.',
+    about1:'At Sevasadan Niramay Pvt. Ltd., we are committed to delivering quality healthcare services with compassion, integrity, and excellence. Our hospital is equipped with modern medical facilities and a dedicated team of doctors, nurses, and healthcare professionals.',
+    about2:'We ensure the best possible care for every patient — from routine consultations to specialized treatments and emergency services, all under one roof in Ichalkaranji.',
+    mission:'To provide accessible, affordable, and high-quality healthcare services while maintaining the highest standards of medical ethics and patient safety — with compassionate care, modern infrastructure, and a skilled medical team.',
+    vision:'To become a trusted and leading healthcare provider in the region, known for excellence in patient care, advanced medical services, and unwavering commitment to community health and well-being.',
+    stats:[{num:'24/7',label:'Emergency Care'},{num:'7+',label:'Hospital Facilities'},{num:'10+',label:'Medical Departments'},{num:'100%',label:'Patient-Centered'}]
+  },
+  contact:{
+    phone:'+91 77969 04008',
+    whatsapp:'917796904008',
+    email:'snpl00000@gmail.com',
+    hrdEmail:'hrd.sevasadanniramayhospital.ich@gmail.com',
+    address:'Ichalkaranji, Maharashtra, India',
+    hours:[
+      {day:'Monday – Saturday',time:'9:00 AM – 8:00 PM'},
+      {day:'Sunday',time:'Emergency Only'},
+      {day:'Emergency Services',time:'24/7 Always Open'}
+    ]
+  },
+  departments:[
+    'Cardiology','General Medicine','Urology','Nephrology',
+    'Obstetrics & Gynecology','Orthopedics','Pediatrics',
+    'Ophthalmology','General Surgery','CVTS','Emergency Care'
+  ],
+  doctors:[
+    {id:1,name:'Dr. Lalit Somani',dept:'Consultant',qual:'',phone:'+91 77969 04008',photo:'Dr.Lalit Somani.jpg',days:'',available:true},
+    {id:2,name:'Dr. Amol Bhore',dept:'Consultant',qual:'',phone:'+91 77969 04008',photo:'Dr.Amol Bhore.jpg',days:'',available:true},
+    {id:3,name:'Dr. Amrutraj Nerlikar',dept:'Orthopedics',qual:'',phone:'+91 77969 04008',photo:'Dr.Amrutraj Nerlikar.jpg',days:'',available:true},
+    {id:4,name:'Dr. Rammohan Yedave',dept:'Consultant',qual:'',phone:'+91 77969 04008',photo:'Dr.Rammohan Yedave.jpg',days:'',available:true},
+    {id:5,name:'Dr. Shivkumar Katti',dept:'Consultant',qual:'',phone:'+91 77969 04008',photo:'Dr.Shivkumar Katti.jpg',days:'',available:true},
+    {id:6,name:'Dr. Rahul Walekar',dept:'Consultant',qual:'',phone:'+91 77969 04008',photo:'Dr.Rahul Walekar.jpg',days:'',available:true}
+  ],
+  nextId:100,
+  lastSaved:null
+};
+
+// ═════════════════════════════════════════════════════════════
+//  STATE
+// ═════════════════════════════════════════════════════════════
+let data = {};
+let editingDoctorId = null;
+let editingDeptIdx = null;
+
+// ═════════════════════════════════════════════════════════════
+//  AUTH
+// ═════════════════════════════════════════════════════════════
+function doLogin(){
+  const u=document.getElementById('loginUser').value.trim();
+  const p=document.getElementById('loginPass').value;
+  if(u===CREDS.user&&p===CREDS.pass){
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('app').style.display='block';
+    initApp();
+  } else {
+    const err=document.getElementById('loginErr');
+    err.style.display='block';
+    setTimeout(()=>err.style.display='none',3000);
+  }
+}
+function doLogout(){
+  document.getElementById('app').style.display='none';
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('loginUser').value='';
+  document.getElementById('loginPass').value='';
+}
+
+// ═════════════════════════════════════════════════════════════
+//  INIT
+// ═════════════════════════════════════════════════════════════
+function initApp(){
+  const raw=localStorage.getItem(KEY);
+  if(raw){
+    try{ data=JSON.parse(raw); }catch(e){ data=deepClone(DEFAULTS); }
+    // Merge in case of missing keys from older versions
+    if(!data.hospital) data.hospital=deepClone(DEFAULTS.hospital);
+    if(!data.contact) data.contact=deepClone(DEFAULTS.contact);
+    if(!data.departments) data.departments=[...DEFAULTS.departments];
+    if(!data.doctors) data.doctors=deepClone(DEFAULTS.doctors);
+    if(!data.nextId) data.nextId=100;
+  } else {
+    data=deepClone(DEFAULTS);
+  }
+  refreshDashboard();
+  buildHeroStatsGrid();
+  loadHospitalForm();
+  loadContactForm();
+  renderDeptGrid();
+  renderDoctorsTable();
+}
+
+function deepClone(o){ return JSON.parse(JSON.stringify(o)); }
+
+function persist(){
+  data.lastSaved=new Date().toISOString();
+  localStorage.setItem(KEY,JSON.stringify(data));
+  showSaveStatus();
+  refreshDashboard();
+}
+
+function showSaveStatus(){
+  const el=document.getElementById('saveStatus');
+  el.textContent='● All changes saved';
+  el.className='save-status';
+  el.style.opacity='1';
+  setTimeout(()=>{ el.style.opacity='0'; },3000);
+}
+
+// ═════════════════════════════════════════════════════════════
+//  NAVIGATION
+// ═════════════════════════════════════════════════════════════
+const SECTIONS={
+  dashboard:'Dashboard',
+  hospital:'Hospital Info',
+  contact:'Contact & Hours',
+  departments:'Departments',
+  doctors:'Doctors'
+};
+function switchSection(id,navEl){
+  document.querySelectorAll('.section').forEach(s=>s.style.display='none');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('sec-'+id).style.display='block';
+  if(navEl) navEl.classList.add('active');
+  document.getElementById('topTitle').textContent=SECTIONS[id]||id;
+  document.getElementById('topCrumb').textContent=SECTIONS[id]||id;
+  if(id==='doctors') renderDoctorsTable();
+  if(id==='departments') renderDeptGrid();
+  if(id==='dashboard') refreshDashboard();
+}
+
+// ═════════════════════════════════════════════════════════════
+//  DASHBOARD
+// ═════════════════════════════════════════════════════════════
+function refreshDashboard(){
+  document.getElementById('dTotalDoctors').textContent=data.doctors.length;
+  document.getElementById('dTotalDepts').textContent=data.departments.length;
+  document.getElementById('dAvailDoctors').textContent=data.doctors.filter(d=>d.available).length;
+  if(data.lastSaved){
+    const d=new Date(data.lastSaved);
+    document.getElementById('dLastSaved').textContent=d.toLocaleDateString('en-IN',{day:'2-digit',month:'short'});
+  }
+  document.getElementById('dPhone').textContent=data.contact.phone||'—';
+  document.getElementById('dEmail').textContent=data.contact.email||'—';
+  document.getElementById('dAddress').textContent=data.contact.address||'—';
+}
+
+// ═════════════════════════════════════════════════════════════
+//  HOSPITAL INFO
+// ═════════════════════════════════════════════════════════════
+function buildHeroStatsGrid(){
+  const grid=document.getElementById('heroStatsGrid');
+  grid.innerHTML='';
+  (data.hospital.stats||[]).forEach((s,i)=>{
+    grid.innerHTML+=`<div style="background:#060d1a;border:1px solid var(--border);border-radius:8px;padding:10px">
+      <label style="font-size:.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;font-weight:700">Stat ${i+1}</label>
+      <input type="text" id="stat_num_${i}" value="${escHtml(s.num)}" placeholder="24/7" style="width:100%;background:transparent;border:none;border-bottom:1px solid var(--border);border-radius:0;color:#e0eaf8;font-size:1rem;font-weight:800;padding:6px 0;outline:none;margin-top:4px"/>
+      <input type="text" id="stat_lbl_${i}" value="${escHtml(s.label)}" placeholder="Label" style="width:100%;background:transparent;border:none;color:var(--text2);font-size:.75rem;padding:4px 0;outline:none;margin-top:2px"/>
+    </div>`;
+  });
+}
+function loadHospitalForm(){
+  const h=data.hospital;
+  document.getElementById('h_name').value=h.name||'';
+  document.getElementById('h_tagline').value=h.tagline||'';
+  document.getElementById('h_badge').value=h.badge||'';
+  document.getElementById('h_heroTitle').value=h.heroTitle||'';
+  document.getElementById('h_heroHL').value=h.heroHL||'';
+  document.getElementById('h_heroDesc').value=h.heroDesc||'';
+  document.getElementById('h_about1').value=h.about1||'';
+  document.getElementById('h_about2').value=h.about2||'';
+  document.getElementById('h_mission').value=h.mission||'';
+  document.getElementById('h_vision').value=h.vision||'';
+  buildHeroStatsGrid();
+}
+function saveHospital(){
+  const h=data.hospital;
+  h.name=document.getElementById('h_name').value.trim();
+  h.tagline=document.getElementById('h_tagline').value.trim();
+  h.badge=document.getElementById('h_badge').value.trim();
+  h.heroTitle=document.getElementById('h_heroTitle').value.trim();
+  h.heroHL=document.getElementById('h_heroHL').value.trim();
+  h.heroDesc=document.getElementById('h_heroDesc').value.trim();
+  h.about1=document.getElementById('h_about1').value.trim();
+  h.about2=document.getElementById('h_about2').value.trim();
+  h.mission=document.getElementById('h_mission').value.trim();
+  h.vision=document.getElementById('h_vision').value.trim();
+  h.stats=h.stats.map((_,i)=>({
+    num:document.getElementById('stat_num_'+i)?.value.trim()||'',
+    label:document.getElementById('stat_lbl_'+i)?.value.trim()||''
+  }));
+  persist();
+  toast('Hospital information saved!','ok');
+}
+
+// ═════════════════════════════════════════════════════════════
+//  CONTACT & HOURS
+// ═════════════════════════════════════════════════════════════
+function loadContactForm(){
+  const c=data.contact;
+  document.getElementById('c_phone').value=c.phone||'';
+  document.getElementById('c_whatsapp').value=c.whatsapp||'';
+  document.getElementById('c_email').value=c.email||'';
+  document.getElementById('c_hrdEmail').value=c.hrdEmail||'';
+  document.getElementById('c_address').value=c.address||'';
+  renderHoursList();
+}
+function renderHoursList(){
+  const list=document.getElementById('hoursList');
+  list.innerHTML='';
+  (data.contact.hours||[]).forEach((row,i)=>{
+    list.innerHTML+=`<div class="hour-row">
+      <input type="text" value="${escHtml(row.day)}" placeholder="e.g. Monday – Friday" id="hr_day_${i}"/>
+      <input type="text" value="${escHtml(row.time)}" placeholder="e.g. 9:00 AM – 6:00 PM" id="hr_time_${i}"/>
+      <button class="btn-rm-hour" onclick="removeHourRow(${i})">Remove</button>
+    </div>`;
+  });
+}
+function addHourRow(){
+  data.contact.hours.push({day:'',time:''});
+  renderHoursList();
+}
+function removeHourRow(i){
+  data.contact.hours.splice(i,1);
+  renderHoursList();
+}
+function saveContact(){
+  const c=data.contact;
+  c.phone=document.getElementById('c_phone').value.trim();
+  c.whatsapp=document.getElementById('c_whatsapp').value.trim();
+  c.email=document.getElementById('c_email').value.trim();
+  c.hrdEmail=document.getElementById('c_hrdEmail').value.trim();
+  c.address=document.getElementById('c_address').value.trim();
+  c.hours=(data.contact.hours||[]).map((_,i)=>({
+    day:document.getElementById('hr_day_'+i)?.value.trim()||'',
+    time:document.getElementById('hr_time_'+i)?.value.trim()||''
+  }));
+  persist();
+  toast('Contact information saved!','ok');
+}
+
+// ═════════════════════════════════════════════════════════════
+//  DEPARTMENTS
+// ═════════════════════════════════════════════════════════════
+function renderDeptGrid(){
+  const grid=document.getElementById('deptGrid');
+  if(!data.departments.length){
+    grid.innerHTML='<div style="color:var(--text3);font-size:.85rem;padding:20px;grid-column:1/-1">No departments yet. Add one to get started.</div>';
+    return;
+  }
+  grid.innerHTML=data.departments.map((d,i)=>`
+    <div class="dept-item">
+      <div class="dept-name">
+        <span class="dept-order">${i+1}</span>
+        ${escHtml(d)}
+      </div>
+      <div class="dept-actions">
+        <button class="btn-edit-sm" onclick="openDeptModal(${i})">Edit</button>
+        <button class="btn-danger" onclick="confirmDeleteDept(${i})">Delete</button>
+      </div>
+    </div>
+  `).join('');
+}
+function openDeptModal(idx=null){
+  editingDeptIdx=idx;
+  document.getElementById('deptModalTitle').textContent=idx===null?'Add Department':'Edit Department';
+  document.getElementById('dept_name').value=idx===null?'':(data.departments[idx]||'');
+  document.getElementById('deptModal').classList.add('open');
+  setTimeout(()=>document.getElementById('dept_name').focus(),100);
+}
+function closeDeptModal(){ document.getElementById('deptModal').classList.remove('open'); editingDeptIdx=null; }
+function closeDeptModalBg(e){ if(e.target===document.getElementById('deptModal')) closeDeptModal(); }
+function saveDept(){
+  const name=document.getElementById('dept_name').value.trim();
+  if(!name){ toast('Please enter a department name.','err'); return; }
+  if(editingDeptIdx===null){
+    data.departments.push(name);
+    toast(`"${name}" added.`,'ok');
+  } else {
+    data.departments[editingDeptIdx]=name;
+    toast(`Department updated.`,'ok');
+  }
+  persist();
+  renderDeptGrid();
+  closeDeptModal();
+}
+function confirmDeleteDept(i){
+  openConfirm(`Delete "${data.departments[i]}"?`,`This department will be removed from the website's appointment form and services list.`,()=>{
+    data.departments.splice(i,1);
+    persist();
+    renderDeptGrid();
+    toast('Department deleted.','ok');
+  });
+}
+
+// ═════════════════════════════════════════════════════════════
+//  DOCTORS
+// ═════════════════════════════════════════════════════════════
+function populateDeptSelect(){
+  const sel=document.getElementById('d_dept');
+  const cur=sel.value;
+  sel.innerHTML='<option value="">Select Department…</option>';
+  data.departments.forEach(d=>{ const o=document.createElement('option'); o.value=d; o.textContent=d; sel.appendChild(o); });
+  if(cur) sel.value=cur;
+}
+function renderDoctorsTable(){
+  const q=(document.getElementById('docSearch')?.value||'').toLowerCase();
+  const filtered=data.doctors.filter(d=>d.name.toLowerCase().includes(q)||d.dept.toLowerCase().includes(q));
+  const body=document.getElementById('doctorTableBody');
+  if(!filtered.length){
+    body.innerHTML='<div class="dt-empty"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 10px;opacity:.3;display:block"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><p>No doctors found.</p></div>';
+    return;
+  }
+  body.innerHTML=filtered.map((d,i)=>{
+    const init=d.name.replace('Dr. ','').split(' ').map(x=>x[0]||'').join('').slice(0,2).toUpperCase();
+    return `<div class="dt-row" style="grid-template-columns:50px 1fr 170px 160px 110px 130px">
+      <div class="cell-num">${i+1}</div>
+      <div class="cell-info">
+        <div class="avatar" id="av${d.id}">${d.photo?`<img src="doctors/${escHtml(d.photo)}" alt="${escHtml(d.name)}" onerror="this.parentElement.textContent='${init}'">`:''}${!d.photo?init:''}</div>
+        <div><div class="cell-name">${escHtml(d.name)}</div><div class="cell-sub">${d.qual||d.photo||'No photo set'}</div></div>
+      </div>
+      <div><span class="badge-dept">${escHtml(d.dept||'—')}</span></div>
+      <div style="font-size:.82rem;color:var(--text2)">${escHtml(d.phone||'—')}</div>
+      <div><span class="badge-avail ${d.available?'yes':'no'}">${d.available?'Available':'Unavailable'}</span></div>
+      <div class="cell-actions">
+        <button class="btn-edit-sm" onclick="openDoctorModal(${d.id})">Edit</button>
+        <button class="btn-danger" onclick="confirmDeleteDoctor(${d.id})">Delete</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+function openDoctorModal(id=null){
+  editingDoctorId=id;
+  populateDeptSelect();
+  document.getElementById('docModalTitle').textContent=id===null?'Add Doctor':'Edit Doctor';
+  if(id===null){
+    document.getElementById('d_name').value='';
+    document.getElementById('d_qual').value='';
+    document.getElementById('d_dept').value='';
+    document.getElementById('d_phone').value='';
+    document.getElementById('d_photo').value='';
+    document.getElementById('d_days').value='';
+    document.getElementById('d_avail').checked=true;
+  } else {
+    const d=data.doctors.find(x=>x.id===id);
+    if(!d) return;
+    document.getElementById('d_name').value=d.name||'';
+    document.getElementById('d_qual').value=d.qual||'';
+    document.getElementById('d_dept').value=d.dept||'';
+    document.getElementById('d_phone').value=d.phone||'';
+    document.getElementById('d_photo').value=d.photo||'';
+    document.getElementById('d_days').value=d.days||'';
+    document.getElementById('d_avail').checked=!!d.available;
+  }
+  updateAvailTxt();
+  document.getElementById('doctorModal').classList.add('open');
+  setTimeout(()=>document.getElementById('d_name').focus(),100);
+}
+function closeDoctorModal(){ document.getElementById('doctorModal').classList.remove('open'); editingDoctorId=null; }
+function closeDoctorModalBg(e){ if(e.target===document.getElementById('doctorModal')) closeDoctorModal(); }
+function updateAvailTxt(){
+  document.getElementById('d_availTxt').textContent=document.getElementById('d_avail').checked?'Available':'Unavailable';
+}
+document.getElementById('d_avail').addEventListener('change',updateAvailTxt);
+
+function saveDoctor(){
+  const name=document.getElementById('d_name').value.trim();
+  const dept=document.getElementById('d_dept').value;
+  if(!name){ toast('Doctor name is required.','err'); return; }
+  if(!dept){ toast('Please select a department.','err'); return; }
+  const obj={
+    name, dept,
+    qual:document.getElementById('d_qual').value.trim(),
+    phone:document.getElementById('d_phone').value.trim(),
+    photo:document.getElementById('d_photo').value.trim(),
+    days:document.getElementById('d_days').value.trim(),
+    available:document.getElementById('d_avail').checked
+  };
+  if(editingDoctorId===null){
+    obj.id=data.nextId++;
+    data.doctors.push(obj);
+    toast(`${name} added.`,'ok');
+  } else {
+    const idx=data.doctors.findIndex(d=>d.id===editingDoctorId);
+    if(idx!==-1){ obj.id=editingDoctorId; data.doctors[idx]=obj; }
+    toast(`${name} updated.`,'ok');
+  }
+  persist();
+  renderDoctorsTable();
+  closeDoctorModal();
+}
+function confirmDeleteDoctor(id){
+  const d=data.doctors.find(x=>x.id===id);
+  openConfirm(`Delete "${d?.name||'this doctor'}"?`,'This doctor will be removed from the website. This cannot be undone.',()=>{
+    data.doctors=data.doctors.filter(x=>x.id!==id);
+    persist();
+    renderDoctorsTable();
+    toast('Doctor removed.','ok');
+  });
+}
+function exportDoctors(){
+  const blob=new Blob([JSON.stringify({doctors:data.doctors},null,2)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='niramay_doctors.json'; a.click();
+  toast('Exported to JSON.','ok');
+}
+
+// ═════════════════════════════════════════════════════════════
+//  CONFIRM DIALOG
+// ═════════════════════════════════════════════════════════════
+let confirmCb=null;
+function openConfirm(title,msg,cb){
+  confirmCb=cb;
+  document.getElementById('confirmMsg').textContent=msg;
+  document.querySelector('.confirm-box h3').textContent=title;
+  document.getElementById('confirmOverlay').classList.add('open');
+  document.getElementById('confirmOkBtn').onclick=()=>{ closeConfirm(); if(confirmCb)confirmCb(); };
+}
+function closeConfirm(){ document.getElementById('confirmOverlay').classList.remove('open'); confirmCb=null; }
+
+// ═════════════════════════════════════════════════════════════
+//  TOAST
+// ═════════════════════════════════════════════════════════════
+function toast(msg,type='ok'){
+  const stack=document.getElementById('toastStack');
+  const t=document.createElement('div');
+  t.className=`toast ${type}`;
+  const icon=type==='ok'
+    ?'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>'
+    :'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
+  t.innerHTML=`${icon}<span>${escHtml(msg)}</span>`;
+  stack.appendChild(t);
+  setTimeout(()=>t.remove(),4000);
+}
+
+// ═════════════════════════════════════════════════════════════
+//  UTILS
+// ═════════════════════════════════════════════════════════════
+function escHtml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+</script>
+</body>
+</html>

@@ -1,0 +1,1269 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sevasadan Niramay Pvt. Ltd. – Quality Healthcare, Ichalkaranji</title>
+  <meta name="description" content="Sevasadan Niramay Pvt. Ltd. – Committed to delivering quality healthcare with compassion, integrity, and excellence in Ichalkaranji, Maharashtra." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: #1a2340; background: #fff; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+    svg { display: inline-block; flex-shrink: 0; }
+
+    :root {
+      --primary: #0a6eb4;
+      --primary-dark: #084f82;
+      --accent: #00b4d8;
+      --light-bg: #f0f7ff;
+      --text: #1a2340;
+      --muted: #5a6a85;
+      --white: #ffffff;
+      --border: #d9e8f5;
+      --emergency: #e63946;
+    }
+
+    /* TOP BAR */
+    .topbar { background: var(--primary-dark); color: #fff; font-size: 0.82rem; padding: 7px 0; }
+    .topbar .inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; }
+    .topbar .item { display: flex; align-items: center; gap: 7px; }
+    .topbar .item svg { opacity: 0.85; }
+    .topbar .emergency { color: #ffd166; font-weight: 700; font-size: 0.88rem; }
+    .topbar a { color: #ffd166; }
+
+    /* NAVBAR */
+    .navbar { background: #fff; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 12px rgba(10,110,180,0.08); }
+    .navbar .inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 70px; }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo-icon { width: 44px; height: 44px; background: var(--primary); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+    .logo-text .name { font-size: 1.05rem; font-weight: 800; color: var(--primary); line-height: 1.1; }
+    .logo-text .tagline { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { padding: 8px 14px; border-radius: 6px; font-size: 0.9rem; font-weight: 500; color: var(--text); transition: background 0.2s, color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { background: var(--light-bg); color: var(--primary); }
+    .nav-cta { background: var(--emergency); color: #fff; padding: 10px 20px; border-radius: 8px; font-weight: 700; font-size: 0.88rem; display: flex; align-items: center; gap: 7px; transition: background 0.2s; white-space: nowrap; }
+    .nav-cta:hover { background: #c1121f; color: #fff; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { width: 24px; height: 2px; background: var(--primary); border-radius: 2px; transition: all 0.3s; }
+
+    /* PAGE */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* HERO */
+    .hero { background: linear-gradient(135deg, #0a4f8a 0%, #0a6eb4 50%, #00b4d8 100%); color: #fff; padding: 90px 24px 80px; text-align: center; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+    .hero .inner { max-width: 800px; margin: 0 auto; position: relative; }
+    .hero .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); padding: 6px 18px; border-radius: 50px; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 20px; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 18px; }
+    .hero h1 span { color: #ffd166; }
+    .hero p { font-size: 1.05rem; opacity: 0.9; max-width: 580px; margin: 0 auto 32px; line-height: 1.7; }
+    .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: #fff; color: var(--primary); padding: 13px 28px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-primary:hover { background: #ffd166; color: var(--primary-dark); }
+    .btn-outline { border: 2px solid rgba(255,255,255,0.6); color: #fff; padding: 13px 28px; border-radius: 8px; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-outline:hover { background: rgba(255,255,255,0.15); }
+    .hero-stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 50px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.2); }
+    .hero-stat .num { font-size: 2.2rem; font-weight: 800; color: #ffd166; }
+    .hero-stat .label { font-size: 0.8rem; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* SECTIONS */
+    section { padding: 70px 24px; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    .section-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; color: var(--text); margin-bottom: 14px; }
+    .section-sub { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 620px; }
+    .divider { width: 52px; height: 4px; background: var(--accent); border-radius: 2px; margin: 16px 0; }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 50px; }
+    .about-image { border-radius: 16px; overflow: hidden; position: relative; background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); min-height: 380px; display: flex; align-items: center; justify-content: center; }
+    .about-image .img-placeholder { text-align: center; padding: 40px; }
+    .about-image .img-placeholder p { color: rgba(255,255,255,0.75); font-size: 0.95rem; margin-top: 16px; font-weight: 500; }
+    .about-badge { position: absolute; bottom: 24px; right: 24px; background: #fff; border-radius: 12px; padding: 14px 20px; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+    .about-badge .num { font-size: 1.8rem; font-weight: 800; color: var(--primary); }
+    .about-badge .lbl { font-size: 0.72rem; color: var(--muted); }
+    .about-content p { color: var(--muted); line-height: 1.8; margin-bottom: 16px; }
+    .about-features { list-style: none; margin: 20px 0; display: flex; flex-direction: column; gap: 10px; }
+    .about-features li { display: flex; align-items: center; gap: 10px; font-weight: 500; font-size: 0.93rem; }
+    .check-icon { width: 22px; height: 22px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .btn-solid { display: inline-flex; align-items: center; gap: 8px; background: var(--primary); color: #fff; padding: 13px 28px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; margin-top: 22px; transition: background 0.2s; }
+    .btn-solid:hover { background: var(--primary-dark); }
+
+    /* WHY CHOOSE US */
+    .why-section { background: var(--light-bg); }
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 40px; }
+    .why-card { background: #fff; border-radius: 14px; padding: 28px 24px; border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; }
+    .why-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(10,110,180,0.1); }
+    .why-icon { width: 52px; height: 52px; background: var(--light-bg); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .why-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .why-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.65; }
+
+    /* MISSION VISION */
+    .mv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 40px; }
+    .mv-card { border-radius: 14px; padding: 36px 30px; color: #fff; position: relative; overflow: hidden; }
+    .mv-card.mission { background: linear-gradient(135deg, var(--primary) 0%, #0884c7 100%); }
+    .mv-card.vision { background: linear-gradient(135deg, #00a896 0%, var(--accent) 100%); }
+    .mv-card h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+    .mv-card p { opacity: 0.9; line-height: 1.75; font-size: 0.95rem; }
+    .mv-bg-icon { position: absolute; right: -16px; bottom: -16px; opacity: 0.07; }
+
+    /* SERVICES */
+    .services-hero { background: linear-gradient(135deg, #084f82 0%, var(--primary) 100%); color: #fff; padding: 60px 24px; text-align: center; }
+    .services-hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+    .services-hero p { opacity: 0.9; max-width: 600px; margin: 0 auto; font-size: 1rem; line-height: 1.7; }
+    .services-content { max-width: 1200px; margin: 0 auto; padding: 50px 24px; }
+    .service-section { margin-bottom: 60px; }
+    .service-section-title { font-size: 1.4rem; font-weight: 800; color: var(--text); margin-bottom: 6px; display: flex; align-items: center; gap: 12px; }
+    .service-section-title .s-icon { width: 40px; height: 40px; background: var(--light-bg); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .service-section .sub { color: var(--muted); margin-bottom: 24px; font-size: 0.92rem; margin-left: 52px; }
+    .facility-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
+    .facility-card { background: var(--light-bg); border: 1px solid var(--border); border-radius: 12px; padding: 22px 18px; text-align: center; transition: all 0.2s; cursor: default; }
+    .facility-card:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .facility-card:hover .fc-icon { background: rgba(255,255,255,0.15); }
+    .facility-card:hover svg { stroke: #fff; }
+    .fc-icon { width: 48px; height: 48px; background: rgba(10,110,180,0.08); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; transition: background 0.2s; }
+    .facility-card p { font-size: 0.86rem; font-weight: 600; }
+    .dept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .dept-card { border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; display: flex; align-items: center; gap: 12px; transition: all 0.2s; cursor: default; }
+    .dept-card:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .dept-card:hover .dept-icon { background: rgba(255,255,255,0.15); }
+    .dept-card:hover svg { stroke: #fff; }
+    .dept-icon { width: 38px; height: 38px; background: var(--light-bg); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
+    .dept-card span { font-size: 0.88rem; font-weight: 600; }
+    .preventive-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .preventive-card { background: linear-gradient(135deg, #e8f4fd, #ddf2f8); border-radius: 12px; padding: 24px; border-left: 4px solid var(--primary); }
+    .preventive-card .pc-head { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .preventive-card h4 { font-weight: 700; color: var(--primary); font-size: 0.97rem; }
+    .preventive-card p { font-size: 0.87rem; color: var(--muted); line-height: 1.65; }
+    .emergency-banner { background: linear-gradient(135deg, var(--emergency) 0%, #c1121f 100%); border-radius: 14px; padding: 32px; color: #fff; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .emergency-banner h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: 6px; display: flex; align-items: center; gap: 10px; }
+    .emergency-banner p { opacity: 0.9; font-size: 0.9rem; }
+    .btn-emergency { background: #fff; color: var(--emergency); padding: 12px 24px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; white-space: nowrap; display: inline-flex; align-items: center; gap: 8px; transition: background 0.2s; }
+    .btn-emergency:hover { background: #fff0f0; }
+
+    /* CAREERS */
+    .careers-hero { background: linear-gradient(135deg, #0a3d62 0%, var(--primary) 100%); color: #fff; padding: 60px 24px; text-align: center; }
+    .careers-hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+    .careers-hero p { opacity: 0.9; max-width: 600px; margin: 0 auto; line-height: 1.7; }
+    .careers-content { max-width: 1200px; margin: 0 auto; padding: 60px 24px; }
+    .careers-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; align-items: start; }
+    .openings-title { font-size: 1.3rem; font-weight: 800; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; color: var(--text); }
+    .job-card { border: 1px solid var(--border); border-radius: 12px; padding: 18px 22px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 16px; transition: all 0.2s; }
+    .job-card:hover { border-color: var(--primary); background: var(--light-bg); box-shadow: 0 4px 16px rgba(10,110,180,0.08); }
+    .job-card-left { display: flex; align-items: center; gap: 14px; }
+    .job-card-icon { width: 40px; height: 40px; background: var(--light-bg); border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .job-info h4 { font-weight: 700; font-size: 0.95rem; margin-bottom: 3px; }
+    .job-info p { font-size: 0.8rem; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+    .job-badge { background: var(--light-bg); color: var(--primary); padding: 4px 12px; border-radius: 20px; font-size: 0.76rem; font-weight: 700; white-space: nowrap; border: 1px solid var(--border); }
+    .why-join-card { background: var(--light-bg); border: 1px solid var(--border); border-radius: 14px; padding: 28px; position: sticky; top: 100px; }
+    .why-join-card h3 { font-weight: 800; font-size: 1.05rem; margin-bottom: 18px; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+    .why-join-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .why-join-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.88rem; line-height: 1.5; }
+    .wj-dot { width: 20px; height: 20px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .apply-box { background: linear-gradient(135deg, var(--primary) 0%, #0884c7 100%); border-radius: 14px; padding: 28px; margin-top: 20px; color: #fff; text-align: center; }
+    .apply-box h4 { font-size: 1rem; font-weight: 800; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .apply-box p { font-size: 0.82rem; opacity: 0.9; margin-bottom: 16px; line-height: 1.6; }
+    .btn-apply-white { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: var(--primary); padding: 12px 22px; border-radius: 8px; font-weight: 700; font-size: 0.9rem; transition: all 0.2s; }
+    .btn-apply-white:hover { background: #ffd166; }
+
+    /* CONTACT */
+    .contact-hero { background: linear-gradient(135deg, #084f82 0%, var(--accent) 100%); color: #fff; padding: 60px 24px; text-align: center; }
+    .contact-hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+    .contact-hero p { opacity: 0.9; max-width: 540px; margin: 0 auto; line-height: 1.7; }
+    .contact-content { max-width: 1200px; margin: 0 auto; padding: 60px 24px; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
+    .contact-info h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 28px; }
+    .contact-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 22px; }
+    .contact-icon { width: 46px; height: 46px; background: var(--light-bg); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .contact-item h4 { font-weight: 700; font-size: 0.9rem; margin-bottom: 3px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.75rem; }
+    .contact-item p, .contact-item a { color: var(--text); font-size: 0.95rem; font-weight: 500; line-height: 1.6; }
+    .contact-item a:hover { color: var(--primary); }
+    .hours-table { width: 100%; border-collapse: collapse; margin-top: 24px; }
+    .hours-table td { padding: 11px 14px; font-size: 0.88rem; border-bottom: 1px solid var(--border); }
+    .hours-table td:first-child { font-weight: 600; color: var(--text); }
+    .hours-table td:last-child { color: var(--muted); text-align: right; }
+    .hours-table tr:last-child td { border-bottom: none; }
+    .badge-247 { display: inline-flex; align-items: center; gap: 5px; background: var(--emergency); color: #fff; padding: 3px 10px; border-radius: 4px; font-size: 0.74rem; font-weight: 700; }
+    .contact-form-box { background: var(--light-bg); border-radius: 16px; padding: 36px; border: 1px solid var(--border); }
+    .contact-form-box h2 { font-size: 1.3rem; font-weight: 800; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { font-size: 0.82rem; font-weight: 600; margin-bottom: 6px; display: block; color: var(--text); }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; border: 1.5px solid var(--border); border-radius: 8px; padding: 11px 14px; font-size: 0.9rem; font-family: inherit; background: #fff; color: var(--text); outline: none; transition: border 0.2s; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .btn-submit { width: 100%; background: var(--primary); color: #fff; border: none; padding: 13px; border-radius: 8px; font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: background 0.2s; font-family: inherit; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn-submit:hover { background: var(--primary-dark); }
+    .map-box { margin-top: 50px; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); }
+    .map-box iframe { width: 100%; height: 380px; display: block; border: none; }
+
+    /* APPOINTMENT CTA */
+    .appt-section { background: var(--primary); color: #fff; padding: 60px 24px; }
+    .appt-inner { max-width: 800px; margin: 0 auto; text-align: center; }
+    .appt-inner h2 { font-size: 2rem; font-weight: 800; margin-bottom: 12px; }
+    .appt-inner p { opacity: 0.9; margin-bottom: 28px; font-size: 1rem; }
+    .appt-phone { font-size: 1.9rem; font-weight: 800; color: #ffd166; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 24px; }
+    .appt-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .btn-whatsapp { background: #25d366; color: #fff; padding: 13px 26px; border-radius: 8px; font-weight: 700; font-size: 0.95rem; transition: background 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-whatsapp:hover { background: #1dae55; color: #fff; }
+
+    /* FOOTER */
+    footer { background: #0d1b2e; color: #9bb5cc; padding: 50px 24px 24px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-brand .name { font-size: 1.05rem; font-weight: 800; color: #fff; margin-bottom: 10px; }
+    .footer-brand p { font-size: 0.84rem; line-height: 1.75; max-width: 280px; }
+    .footer-brand .tagline-badge { display: inline-block; background: var(--primary); color: #fff; padding: 4px 12px; border-radius: 4px; font-size: 0.74rem; font-weight: 700; margin-bottom: 12px; letter-spacing: 0.04em; }
+    .footer-col h4 { color: #fff; font-size: 0.88rem; font-weight: 700; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col ul li a { font-size: 0.84rem; color: #9bb5cc; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-contact-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.84rem; margin-bottom: 12px; }
+    .footer-contact-item .fi-icon { width: 28px; height: 28px; background: rgba(255,255,255,0.06); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .footer-bottom { border-top: 1px solid #1e3050; padding-top: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 0.8rem; }
+
+    /* DOCTORS PAGE */
+    .doctors-hero { background: linear-gradient(135deg, #084f82 0%, #0a6eb4 100%); color: #fff; padding: 60px 24px; text-align: center; }
+    .doctors-hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+    .doctors-hero p { opacity: 0.9; max-width: 560px; margin: 0 auto; line-height: 1.7; }
+    .doctors-content { max-width: 1200px; margin: 0 auto; padding: 60px 24px; }
+    .doctors-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .doctor-card {
+      background: #fff; border-radius: 18px; overflow: hidden;
+      border: 1px solid var(--border); transition: transform 0.25s, box-shadow 0.25s;
+      box-shadow: 0 2px 12px rgba(10,110,180,0.06);
+    }
+    .doctor-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(10,110,180,0.14); }
+    .doctor-photo-wrap {
+      width: 100%; aspect-ratio: 4/4.5; overflow: hidden; position: relative;
+      background: linear-gradient(135deg, #e8f4fd, #cce4f6);
+    }
+    .doctor-photo-wrap img {
+      width: 100%; height: 100%; object-fit: cover; object-position: top center;
+      transition: transform 0.4s ease;
+    }
+    .doctor-card:hover .doctor-photo-wrap img { transform: scale(1.04); }
+    .doctor-photo-placeholder {
+      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+    }
+    .doctor-info { padding: 20px 22px 22px; }
+    .doctor-info h3 { font-size: 1.05rem; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+    .doctor-dept {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--light-bg); color: var(--primary);
+      padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 600;
+      border: 1px solid var(--border); margin-bottom: 14px;
+    }
+    .doctor-divider { height: 1px; background: var(--border); margin-bottom: 14px; }
+    .doctor-action {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .doctor-avail { font-size: 0.78rem; color: #16a34a; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+    .doctor-avail::before { content: ''; width: 7px; height: 7px; background: #16a34a; border-radius: 50%; display: inline-block; }
+    .btn-consult {
+      font-size: 0.8rem; font-weight: 700; color: var(--primary);
+      border: 1.5px solid var(--primary); padding: 6px 14px; border-radius: 6px;
+      transition: all 0.2s; display: inline-flex; align-items: center; gap: 5px;
+    }
+    .btn-consult:hover { background: var(--primary); color: #fff; }
+
+    @media (max-width: 900px) { .doctors-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 70px; left: 0; right: 0; background: #fff; padding: 16px 24px; border-bottom: 1px solid var(--border); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+      .about-grid, .mv-grid, .contact-grid, .careers-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .preventive-grid { grid-template-columns: 1fr; }
+      .doctors-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="inner">
+    <div class="item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#cde7ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <span>Ichalkaranji, Maharashtra, India</span>
+    </div>
+    <div class="item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#cde7ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span>24 Hours Service Available</span>
+    </div>
+    <div class="item emergency">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffd166" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34a2 2 0 0 1 2-2.18H7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <a href="tel:+917796904008">Emergency: +91 77969 04008</a>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="inner">
+    <div class="logo">
+      <div class="logo-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <div class="logo-text">
+        <div class="name">Sevasadan Niramay</div>
+        <div class="tagline">Pvt. Ltd. — Ichalkaranji</div>
+      </div>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#" class="active" onclick="showPage('home',this)">Home</a></li>
+      <li><a href="#" onclick="showPage('services',this)">Services</a></li>
+      <li><a href="#" onclick="showPage('doctors',this)">Our Doctors</a></li>
+      <li><a href="#" onclick="showPage('careers',this)">Careers</a></li>
+      <li><a href="#" onclick="showPage('contact',this)">Contact Us</a></li>
+    </ul>
+    <a href="tel:+917796904008" class="nav-cta">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34a2 2 0 0 1 2-2.18H7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Call Now
+    </a>
+    <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════ HOME PAGE ══════════ -->
+<div class="page active" id="page-home">
+
+  <section class="hero">
+    <div class="inner">
+      <div class="badge">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg>
+        Trusted Healthcare in Ichalkaranji
+      </div>
+      <h1>Your Health is<br/><span>Our Responsibility</span></h1>
+      <p>At Sevasadan Niramay Pvt. Ltd., we deliver quality healthcare with compassion, integrity, and excellence — equipped with modern facilities and a dedicated medical team.</p>
+      <div class="hero-btns">
+        <a href="tel:+917796904008" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34a2 2 0 0 1 2-2.18H7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +91 77969 04008
+        </a>
+        <a href="#" onclick="showPage('services',null)" class="btn-outline">
+          Explore Services
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">24/7</div><div class="label">Emergency Care</div></div>
+        <div class="hero-stat"><div class="num">7+</div><div class="label">Hospital Facilities</div></div>
+        <div class="hero-stat"><div class="num">10+</div><div class="label">Medical Departments</div></div>
+        <div class="hero-stat"><div class="num">100%</div><div class="label">Patient-Centered</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section>
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-image">
+          <div class="img-placeholder">
+            <svg width="110" height="110" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            <p>Compassionate Care, Every Day</p>
+          </div>
+          <div class="about-badge">
+            <div class="num">24×7</div>
+            <div class="lbl">Always Available</div>
+          </div>
+        </div>
+        <div class="about-content">
+          <div class="section-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            About Us
+          </div>
+          <h2 class="section-title">Welcome to Sevasadan Niramay Pvt. Ltd.</h2>
+          <div class="divider"></div>
+          <p>At Sevasadan Niramay Pvt. Ltd., we are committed to delivering quality healthcare services with compassion, integrity, and excellence. Our hospital is equipped with modern medical facilities and a dedicated team of doctors, nurses, and healthcare professionals.</p>
+          <p>We ensure the best possible care for every patient — from routine consultations to specialized treatments and emergency services, all under one roof in Ichalkaranji.</p>
+          <ul class="about-features">
+            <li>
+              <div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Experienced &amp; Qualified Medical Professionals
+            </li>
+            <li>
+              <div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Patient-Centered Approach
+            </li>
+            <li>
+              <div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Affordable &amp; Transparent Billing
+            </li>
+            <li>
+              <div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Modern Infrastructure
+            </li>
+            <li>
+              <div class="check-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+              Ethical Medical Practices
+            </li>
+          </ul>
+          <a href="#" onclick="showPage('services',null)" class="btn-solid">
+            View Our Services
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section class="why-section">
+    <div class="section-inner">
+      <div style="text-align:center; max-width:600px; margin:0 auto;">
+        <div class="section-label" style="justify-content:center;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Why Choose Us
+        </div>
+        <h2 class="section-title">Delivering Excellence in Healthcare</h2>
+        <p class="section-sub">We put patients first — every decision, every treatment, every interaction.</p>
+        <div class="divider" style="margin:16px auto 0;"></div>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <h3>Expert Medical Professionals</h3>
+          <p>Our team of experienced and qualified doctors, nurses, and specialists is dedicated to providing the highest standard of care.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h3>Patient-Centered Approach</h3>
+          <p>We treat every patient as an individual, tailoring care plans to their specific needs and ensuring comfort throughout.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <h3>Affordable &amp; Transparent Billing</h3>
+          <p>Quality healthcare should be accessible. Our billing is clear, honest, and designed to be affordable for every family.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg>
+          </div>
+          <h3>Modern Infrastructure</h3>
+          <p>State-of-the-art facilities including a well-equipped ICU, NICU, Modular OTs, and advanced diagnostic services.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3>24/7 Emergency Support</h3>
+          <p>Our emergency team is available round the clock, 365 days a year, ready to respond immediately when you need it most.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Ethical Medical Practices</h3>
+          <p>We uphold the highest standards of medical ethics — transparency, integrity, and patient safety are never compromised.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION & VISION -->
+  <section>
+    <div class="section-inner">
+      <div style="text-align:center; max-width:600px; margin:0 auto;">
+        <div class="section-label" style="justify-content:center;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+          Our Purpose
+        </div>
+        <h2 class="section-title">Mission &amp; Vision</h2>
+        <div class="divider" style="margin:14px auto 30px;"></div>
+      </div>
+      <div class="mv-grid">
+        <div class="mv-card mission">
+          <h3>
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            Our Mission
+          </h3>
+          <p>To provide accessible, affordable, and high-quality healthcare services while maintaining the highest standards of medical ethics and patient safety — with compassionate care, modern infrastructure, and a skilled medical team.</p>
+          <div class="mv-bg-icon">
+            <svg width="160" height="160" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          </div>
+        </div>
+        <div class="mv-card vision">
+          <h3>
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            Our Vision
+          </h3>
+          <p>To become a trusted and leading healthcare provider in the region, known for excellence in patient care, advanced medical services, and unwavering commitment to community health and well-being.</p>
+          <div class="mv-bg-icon">
+            <svg width="160" height="160" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="appt-section">
+    <div class="appt-inner">
+      <h2>Need Immediate Medical Assistance?</h2>
+      <p>Our team is available 24 hours a day, 7 days a week. Don't wait — reach out now.</p>
+      <div class="appt-phone">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffd166" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34a2 2 0 0 1 2-2.18H7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <a href="tel:+917796904008" style="color:#ffd166;">+91 77969 04008</a>
+      </div>
+      <div class="appt-btns">
+        <a href="tel:+917796904008" class="btn-primary">Call Now</a>
+        <a href="https://wa.me/917796904008?text=Hello%2C%20I%20need%20a%20medical%20consultation." class="btn-whatsapp" target="_blank">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+        <a href="mailto:snpl00000@gmail.com" class="btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email Us
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════ SERVICES PAGE ══════════ -->
+<div class="page" id="page-services">
+  <div class="services-hero">
+    <h1>
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      Our Healthcare Services
+    </h1>
+    <p>Comprehensive healthcare services with quality, care, and professionalism — from advanced diagnostics to specialized treatment.</p>
+  </div>
+
+  <div class="services-content">
+
+    <!-- Hospital Facilities -->
+    <div class="service-section">
+      <div class="service-section-title">
+        <div class="s-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg></div>
+        Hospital Facilities
+      </div>
+      <p class="sub">Modern infrastructure to handle all types of medical needs, around the clock.</p>
+      <div class="facility-grid">
+        <div class="facility-card">
+          <div class="fc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+          <p>Well Equipped ICU</p>
+        </div>
+        <div class="facility-card">
+          <div class="fc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <p>NICU</p>
+        </div>
+        <div class="facility-card">
+          <div class="fc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+          <p>24×7 Pharmacy</p>
+        </div>
+        <div class="facility-card">
+          <div class="fc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+          <p>24×7 Ambulance</p>
+        </div>
+        <div class="facility-card">
+          <div class="fc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <p>Cath Lab Services</p>
+        </div>
+        <div class="facility-card">
+          <div class="fc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div>
+          <p>Modular Operation Theaters</p>
+        </div>
+        <div class="facility-card">
+          <div class="fc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a5 5 0 1 0 0 10A5 5 0 0 0 12 2z"/><path d="M12 12c-5 0-9 2.5-9 5v1h18v-1c0-2.5-4-5-9-5z"/></svg></div>
+          <p>Dialysis Department</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Medical Departments -->
+    <div class="service-section">
+      <div class="service-section-title">
+        <div class="s-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        Medical Departments
+      </div>
+      <p class="sub">Specialized treatment through our comprehensive range of clinical departments.</p>
+      <div class="dept-grid">
+        <div class="dept-card">
+          <div class="dept-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+          <span>General Medicine</span>
+        </div>
+        <div class="dept-card">
+          <div class="dept-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+          <span>Cardiology</span>
+        </div>
+        <div class="dept-card">
+          <div class="dept-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
+          <span>Urology</span>
+        </div>
+        <div class="dept-card">
+          <div class="dept-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+          <span>Nephrology</span>
+        </div>
+        <div class="dept-card">
+          <div class="dept-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+          <span>Obstetrics &amp; Gynecology</span>
+        </div>
+        <div class="dept-card">
+          <div class="dept-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+          <span>Orthopedics</span>
+        </div>
+        <div class="dept-card">
+          <div class="dept-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          <span>Pediatrics</span>
+        </div>
+        <div class="dept-card">
+          <div class="dept-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <span>Ophthalmology</span>
+        </div>
+        <div class="dept-card">
+          <div class="dept-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div>
+          <span>General Surgery</span>
+        </div>
+        <div class="dept-card">
+          <div class="dept-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <span>CVTS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preventive Health -->
+    <div class="service-section">
+      <div class="service-section-title">
+        <div class="s-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        Preventive Health Services
+      </div>
+      <p class="sub">Proactive care to help you stay healthy and detect risks early.</p>
+      <div class="preventive-grid">
+        <div class="preventive-card">
+          <div class="pc-head">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg>
+            <h4>Health Check-up Packages</h4>
+          </div>
+          <p>Comprehensive health screening packages designed for all age groups to detect issues early and ensure timely intervention.</p>
+        </div>
+        <div class="preventive-card">
+          <div class="pc-head">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <h4>Preventive Screenings</h4>
+          </div>
+          <p>Targeted diagnostic screenings for diabetes, hypertension, cardiac risks, and more — tailored to your personal health profile.</p>
+        </div>
+        <div class="preventive-card">
+          <div class="pc-head">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <h4>Health Counseling</h4>
+          </div>
+          <p>One-on-one consultations guiding you on nutrition, lifestyle, stress management, and disease prevention strategies.</p>
+        </div>
+        <div class="preventive-card">
+          <div class="pc-head">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <h4>Wellness Programs</h4>
+          </div>
+          <p>Structured wellness initiatives for corporate groups and communities, including education, screenings, and follow-up care plans.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Emergency -->
+    <div class="service-section">
+      <div class="service-section-title">
+        <div class="s-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--emergency)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        Emergency Support
+      </div>
+      <p class="sub">Immediate medical response available around the clock.</p>
+      <div class="emergency-banner">
+        <div>
+          <h3>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            24/7 Emergency Care
+          </h3>
+          <p>Basic Emergency Care &nbsp;·&nbsp; First Aid &amp; Stabilization &nbsp;·&nbsp; Immediate Medical Response<br/>Our emergency team handles all critical situations with speed and precision.</p>
+        </div>
+        <a href="tel:+917796904008" class="btn-emergency">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34a2 2 0 0 1 2-2.18H7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call Emergency
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ CAREERS PAGE ══════════ -->
+<div class="page" id="page-careers">
+  <div class="careers-hero">
+    <h1>
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      Careers at Sevasadan Niramay
+    </h1>
+    <p>Join our dedicated healthcare team. Be part of a mission-driven organization committed to quality, ethics, and compassionate patient care.</p>
+  </div>
+
+  <div class="careers-content">
+    <div class="careers-grid">
+      <div>
+        <div class="openings-title">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          Current Openings
+        </div>
+
+        <!-- Job cards -->
+        <div class="job-card">
+          <div class="job-card-left">
+            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+            <div class="job-info"><h4>Staff Nurse</h4><p>GNM / P.B.BSc / BSc Nursing &nbsp;·&nbsp; Ichalkaranji</p></div>
+          </div>
+          <span class="job-badge">Nursing</span>
+        </div>
+
+        <div class="job-card">
+          <div class="job-card-left">
+            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+            <div class="job-info"><h4>RMO (Resident Medical Officer)</h4><p>BHMS / BAMS &nbsp;·&nbsp; Ichalkaranji</p></div>
+          </div>
+          <span class="job-badge">Medical</span>
+        </div>
+
+        <div class="job-card">
+          <div class="job-card-left">
+            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+            <div class="job-info"><h4>Consultant</h4><p>MBBS / MD / MS (Surgery) &nbsp;·&nbsp; Ichalkaranji</p></div>
+          </div>
+          <span class="job-badge">Senior</span>
+        </div>
+
+        <div class="job-card">
+          <div class="job-card-left">
+            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+            <div class="job-info"><h4>Receptionist</h4><p>Graduate &nbsp;·&nbsp; Ichalkaranji</p></div>
+          </div>
+          <span class="job-badge">Admin</span>
+        </div>
+
+        <div class="job-card">
+          <div class="job-card-left">
+            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+            <div class="job-info"><h4>Cath Lab Technician</h4><p>Relevant Certification / Degree &nbsp;·&nbsp; Ichalkaranji</p></div>
+          </div>
+          <span class="job-badge">Technical</span>
+        </div>
+
+        <div class="job-card">
+          <div class="job-card-left">
+            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg></div>
+            <div class="job-info"><h4>Lab Incharge</h4><p>DMLT / BSc MLT &nbsp;·&nbsp; Ichalkaranji</p></div>
+          </div>
+          <span class="job-badge">Technical</span>
+        </div>
+
+        <div class="job-card">
+          <div class="job-card-left">
+            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+            <div class="job-info"><h4>X-Ray Technician</h4><p>DMRT / BSc Radiology &nbsp;·&nbsp; Ichalkaranji</p></div>
+          </div>
+          <span class="job-badge">Technical</span>
+        </div>
+
+        <div class="job-card">
+          <div class="job-card-left">
+            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+            <div class="job-info"><h4>Electrician</h4><p>ITI / Diploma &nbsp;·&nbsp; Ichalkaranji</p></div>
+          </div>
+          <span class="job-badge">Maintenance</span>
+        </div>
+
+        <div class="job-card">
+          <div class="job-card-left">
+            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+            <div class="job-info"><h4>Driver</h4><p>Valid License Required &nbsp;·&nbsp; Ichalkaranji</p></div>
+          </div>
+          <span class="job-badge">Support</span>
+        </div>
+
+        <div class="job-card">
+          <div class="job-card-left">
+            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+            <div class="job-info"><h4>Maintenance Executive</h4><p>Relevant Experience &nbsp;·&nbsp; Ichalkaranji</p></div>
+          </div>
+          <span class="job-badge">Maintenance</span>
+        </div>
+
+        <div style="margin-top:28px; padding:22px; background:#fff7e6; border-radius:12px; border-left:4px solid #ffd166; display:flex; align-items:center; gap:14px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f4a500" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <div>
+            <p style="font-size:0.85rem; color:var(--muted); margin-bottom:4px;">Prefer email? Send your resume directly:</p>
+            <a href="mailto:hrd.sevasadanniramayhospital.ich@gmail.com" style="font-weight:700; color:var(--primary); font-size:0.88rem;">hrd.sevasadanniramayhospital.ich@gmail.com</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div>
+        <div class="why-join-card">
+          <h3>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Why Join Us?
+          </h3>
+          <ul class="why-join-list">
+            <li><div class="wj-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Professional work culture with a respectful environment</li>
+            <li><div class="wj-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Career growth opportunities across departments</li>
+            <li><div class="wj-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Skill development and continuous learning support</li>
+            <li><div class="wj-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Ethical and transparent management</li>
+            <li><div class="wj-dot"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Well-equipped modern healthcare facility</li>
+          </ul>
+        </div>
+        <div class="apply-box">
+          <h4>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Apply Online
+          </h4>
+          <p>Fill out the official Job Application Form — takes just a few minutes.</p>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSflC0i_6OExOL3dbHDiZC9BdG334_MilARVM-NLiYXpyAN8zw/viewform?usp=dialog" class="btn-apply-white" target="_blank">
+            Apply Now
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+        <div style="margin-top:16px; background:#fff; border:1px solid var(--border); border-radius:14px; padding:22px;">
+          <h4 style="font-weight:700; margin-bottom:12px; font-size:0.95rem; display:flex; align-items:center; gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34a2 2 0 0 1 2-2.18H7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            HR Department
+          </h4>
+          <p style="font-size:0.85rem; color:var(--muted); line-height:1.6; margin-bottom:10px;">For recruitment queries, contact HR during working hours.</p>
+          <a href="tel:+917796904008" style="display:flex; align-items:center; gap:6px; font-weight:700; color:var(--primary); font-size:0.9rem;">+91 77969 04008</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ CONTACT PAGE ══════════ -->
+<div class="page" id="page-contact">
+  <div class="contact-hero">
+    <h1>
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34a2 2 0 0 1 2-2.18H7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Contact Us
+    </h1>
+    <p>We are here to help you with your healthcare needs. Feel free to contact or visit us anytime.</p>
+  </div>
+
+  <div class="contact-content">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>Get In Touch</h2>
+        <div class="contact-item">
+          <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><h4>Location</h4><p>Ichalkaranji, Maharashtra, India</p></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34a2 2 0 0 1 2-2.18H7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><h4>Phone</h4><a href="tel:+917796904008">+91 77969 04008</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><h4>Email</h4><a href="mailto:snpl00000@gmail.com">snpl00000@gmail.com</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon" style="background:#fff0f1;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--emergency)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <div><h4>Emergency</h4><a href="tel:+917796904008" style="color:var(--emergency); font-weight:700;">24/7 Emergency: +91 77969 04008</a></div>
+        </div>
+
+        <h3 style="font-size:0.95rem; font-weight:700; margin-top:8px; margin-bottom:4px; display:flex; align-items:center; gap:8px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Working Hours
+        </h3>
+        <table class="hours-table">
+          <tr><td>Monday – Saturday</td><td>9:00 AM – 8:00 PM</td></tr>
+          <tr><td>Sunday</td><td><span class="badge-247"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Emergency Only</span></td></tr>
+          <tr><td>Emergency Services</td><td><span class="badge-247"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 24/7 Always Open</span></td></tr>
+        </table>
+
+        <div style="margin-top:24px; background:var(--light-bg); border-radius:12px; padding:18px; border:1px solid var(--border);">
+          <p style="font-size:0.86rem; color:var(--muted); margin-bottom:12px;">Connect on WhatsApp for quick queries:</p>
+          <a href="https://wa.me/917796904008?text=Hello%2C%20I%20need%20a%20consultation." class="btn-whatsapp" target="_blank" style="display:inline-flex; font-size:0.88rem; padding:10px 18px;">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Appointment Form -->
+      <div class="contact-form-box">
+        <h2>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Book an Appointment
+        </h2>
+        <form onsubmit="handleForm(event)">
+          <div class="form-row">
+            <div class="form-group"><label>Full Name *</label><input type="text" placeholder="Your full name" required /></div>
+            <div class="form-group"><label>Phone Number *</label><input type="tel" placeholder="+91 XXXXX XXXXX" required /></div>
+          </div>
+          <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com" /></div>
+          <div class="form-group">
+            <label>Department</label>
+            <select>
+              <option value="">Select Department</option>
+              <option>General Medicine</option>
+              <option>Cardiology</option>
+              <option>Urology</option>
+              <option>Nephrology</option>
+              <option>Obstetrics &amp; Gynecology</option>
+              <option>Orthopedics</option>
+              <option>Pediatrics</option>
+              <option>Ophthalmology</option>
+              <option>General Surgery</option>
+              <option>CVTS</option>
+              <option>Emergency Care</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Preferred Date</label><input type="date" /></div>
+          <div class="form-group"><label>Additional Information</label><textarea placeholder="Describe your symptoms or any additional details..."></textarea></div>
+          <button type="submit" class="btn-submit">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Submit Appointment Request
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="map-box">
+      <iframe src="https://maps.google.com/maps?q=Ichalkaranji,Maharashtra,India&t=&z=14&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" title="Sevasadan Niramay – Ichalkaranji"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ DOCTORS PAGE ══════════ -->
+<div class="page" id="page-doctors">
+  <div class="doctors-hero">
+    <h1>
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Meet Our Doctors
+    </h1>
+    <p>Our team of experienced and dedicated medical professionals committed to your health and well-being.</p>
+  </div>
+
+  <div class="doctors-content">
+    <div class="doctors-grid" id="doctorsGrid">
+      <!-- Doctor cards rendered dynamically from CMS -->
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="tagline-badge">Your Health. Our Responsibility.</div>
+        <div class="name">Sevasadan Niramay Pvt. Ltd.</div>
+        <p>A multi-speciality healthcare institution committed to delivering quality, ethical, and compassionate medical services in Ichalkaranji, Maharashtra.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#" onclick="showPage('home',null)">Home</a></li>
+          <li><a href="#" onclick="showPage('services',null)">Services</a></li>
+          <li><a href="#" onclick="showPage('doctors',null)">Our Doctors</a></li>
+          <li><a href="#" onclick="showPage('careers',null)">Careers</a></li>
+          <li><a href="#" onclick="showPage('contact',null)">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Departments</h4>
+        <ul>
+          <li><a href="#">General Medicine</a></li>
+          <li><a href="#">Cardiology</a></li>
+          <li><a href="#">Orthopedics</a></li>
+          <li><a href="#">Nephrology</a></li>
+          <li><a href="#">Pediatrics</a></li>
+          <li><a href="#">General Surgery</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item">
+          <div class="fi-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9bb5cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <span>Ichalkaranji, Maharashtra</span>
+        </div>
+        <div class="footer-contact-item">
+          <div class="fi-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9bb5cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34a2 2 0 0 1 2-2.18H7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <a href="tel:+917796904008" style="color:#9bb5cc;">+91 77969 04008</a>
+        </div>
+        <div class="footer-contact-item">
+          <div class="fi-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9bb5cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <a href="mailto:snpl00000@gmail.com" style="color:#9bb5cc;">snpl00000@gmail.com</a>
+        </div>
+        <div class="footer-contact-item">
+          <div class="fi-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9bb5cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <span>24 Hours Emergency</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Sevasadan Niramay Pvt. Ltd. All rights reserved.</span>
+      <span>Ichalkaranji, Maharashtra, India</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── CMS DATA KEY ───────────────────────────────────────────────────────────
+const CMS_KEY = 'niramay_data_v3';
+
+// ─── DEFAULTS (fallback if admin hasn't saved yet) ───────────────────────────
+const CMS_DEFAULTS = {
+  hospital:{
+    name:'Sevasadan Niramay Pvt. Ltd.',tagline:'Pvt. Ltd. — Ichalkaranji',
+    badge:'Trusted Healthcare in Ichalkaranji',
+    heroTitle:'Your Health is',heroHL:'Our Responsibility',
+    heroDesc:'At Sevasadan Niramay Pvt. Ltd., we deliver quality healthcare with compassion, integrity, and excellence — equipped with modern facilities and a dedicated medical team.',
+    about1:'At Sevasadan Niramay Pvt. Ltd., we are committed to delivering quality healthcare services with compassion, integrity, and excellence. Our hospital is equipped with modern medical facilities and a dedicated team of doctors, nurses, and healthcare professionals.',
+    about2:'We ensure the best possible care for every patient — from routine consultations to specialized treatments and emergency services, all under one roof in Ichalkaranji.',
+    mission:'To provide accessible, affordable, and high-quality healthcare services while maintaining the highest standards of medical ethics and patient safety — with compassionate care, modern infrastructure, and a skilled medical team.',
+    vision:'To become a trusted and leading healthcare provider in the region, known for excellence in patient care, advanced medical services, and unwavering commitment to community health and well-being.',
+    stats:[{num:'24/7',label:'Emergency Care'},{num:'7+',label:'Hospital Facilities'},{num:'10+',label:'Medical Departments'},{num:'100%',label:'Patient-Centered'}]
+  },
+  contact:{
+    phone:'+91 77969 04008',whatsapp:'917796904008',
+    email:'snpl00000@gmail.com',hrdEmail:'hrd.sevasadanniramayhospital.ich@gmail.com',
+    address:'Ichalkaranji, Maharashtra, India',
+    hours:[{day:'Monday – Saturday',time:'9:00 AM – 8:00 PM'},{day:'Sunday',time:'Emergency Only'},{day:'Emergency Services',time:'24/7 Always Open'}]
+  },
+  departments:['Cardiology','General Medicine','Urology','Nephrology','Obstetrics & Gynecology','Orthopedics','Pediatrics','Ophthalmology','General Surgery','CVTS','Emergency Care'],
+  doctors:[
+    {id:1,name:'Dr. Lalit Somani',dept:'Consultant',qual:'',phone:'+91 77969 04008',photo:'Dr.Lalit Somani.jpg',days:'',available:true},
+    {id:2,name:'Dr. Amol Bhore',dept:'Consultant',qual:'',phone:'+91 77969 04008',photo:'Dr.Amol Bhore.jpg',days:'',available:true},
+    {id:3,name:'Dr. Amrutraj Nerlikar',dept:'Orthopedics',qual:'',phone:'+91 77969 04008',photo:'Dr.Amrutraj Nerlikar.jpg',days:'',available:true},
+    {id:4,name:'Dr. Rammohan Yedave',dept:'Consultant',qual:'',phone:'+91 77969 04008',photo:'Dr.Rammohan Yedave.jpg',days:'',available:true},
+    {id:5,name:'Dr. Shivkumar Katti',dept:'Consultant',qual:'',phone:'+91 77969 04008',photo:'Dr.Shivkumar Katti.jpg',days:'',available:true},
+    {id:6,name:'Dr. Rahul Walekar',dept:'Consultant',qual:'',phone:'+91 77969 04008',photo:'Dr.Rahul Walekar.jpg',days:'',available:true}
+  ]
+};
+
+// ─── LOAD CMS DATA ───────────────────────────────────────────────────────────
+function getCmsData() {
+  try {
+    const raw = localStorage.getItem(CMS_KEY);
+    if (!raw) return CMS_DEFAULTS;
+    const d = JSON.parse(raw);
+    return {
+      hospital: Object.assign({}, CMS_DEFAULTS.hospital, d.hospital || {}),
+      contact:  Object.assign({}, CMS_DEFAULTS.contact,  d.contact  || {}),
+      departments: d.departments && d.departments.length ? d.departments : CMS_DEFAULTS.departments,
+      doctors:    d.doctors    && d.doctors.length    ? d.doctors    : CMS_DEFAULTS.doctors
+    };
+  } catch(e) { return CMS_DEFAULTS; }
+}
+
+// ─── APPLY CMS DATA TO PAGE ──────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  const cms = getCmsData();
+
+  // ── PHONE & WHATSAPP links ───
+  const ph = cms.contact.phone || '';
+  const wa = cms.contact.whatsapp || '';
+  const em = cms.contact.email || '';
+  const hrdEm = cms.contact.hrdEmail || '';
+  const addr = cms.contact.address || '';
+
+  // Replace all phone href links
+  document.querySelectorAll('a[href^="tel:"]').forEach(a => {
+    const digits = ph.replace(/[^\d+]/g, '');
+    a.href = 'tel:' + digits;
+    if (a.textContent.includes('+91') || a.textContent.match(/\d{5}/)) a.textContent = ph;
+  });
+  // Replace WhatsApp links
+  document.querySelectorAll('a[href*="wa.me"]').forEach(a => {
+    a.href = a.href.replace(/wa\.me\/\d+/, 'wa.me/' + wa);
+  });
+  // Replace email links
+  document.querySelectorAll('a[href^="mailto:snpl"]').forEach(a => {
+    a.href = 'mailto:' + em;
+    if (a.textContent.includes('@')) a.textContent = em;
+  });
+  document.querySelectorAll('a[href^="mailto:hrd"]').forEach(a => {
+    a.href = 'mailto:' + hrdEm;
+    if (a.textContent.includes('@')) a.textContent = hrdEm;
+  });
+
+  // ── ADDRESS ───
+  document.querySelectorAll('[data-cms="address"]').forEach(el => el.textContent = addr);
+
+  // ── TOPBAR emergency text ───
+  const emerEl = document.querySelector('.topbar .emergency a');
+  if (emerEl) { emerEl.href = 'tel:' + ph.replace(/[^\d+]/g,''); emerEl.textContent = 'Emergency: ' + ph; }
+
+  // ── HOSPITAL NAME & TAGLINE ───
+  const h = cms.hospital;
+  const nameEl = document.querySelector('.logo-text .name');
+  if (nameEl) nameEl.textContent = h.name || CMS_DEFAULTS.hospital.name;
+  const tagEl = document.querySelector('.logo-text .tagline');
+  if (tagEl) tagEl.textContent = h.tagline || CMS_DEFAULTS.hospital.tagline;
+
+  // ── HERO SECTION ───
+  const heroBadgeEl = document.querySelector('.hero .badge');
+  if (heroBadgeEl) {
+    const svg = heroBadgeEl.querySelector('svg');
+    heroBadgeEl.textContent = '';
+    if (svg) heroBadgeEl.appendChild(svg);
+    heroBadgeEl.appendChild(document.createTextNode(' ' + (h.badge || '')));
+  }
+  const heroH1 = document.querySelector('.hero h1');
+  if (heroH1) heroH1.innerHTML = (h.heroTitle||'Your Health is') + '<br/><span>' + (h.heroHL||'Our Responsibility') + '</span>';
+  const heroP = document.querySelector('.hero > .inner > p');
+  if (heroP) heroP.textContent = h.heroDesc || '';
+
+  // ── HERO STATS ───
+  const statEls = document.querySelectorAll('.hero-stat');
+  (h.stats || []).forEach((s, i) => {
+    if (statEls[i]) {
+      const numEl = statEls[i].querySelector('.num');
+      const lblEl = statEls[i].querySelector('.label');
+      if (numEl) numEl.textContent = s.num;
+      if (lblEl) lblEl.textContent = s.label;
+    }
+  });
+
+  // ── ABOUT SECTION ───
+  const aboutPs = document.querySelectorAll('.about-content p');
+  if (aboutPs[0] && h.about1) aboutPs[0].textContent = h.about1;
+  if (aboutPs[1] && h.about2) aboutPs[1].textContent = h.about2;
+
+  // ── MISSION & VISION ───
+  const mvCards = document.querySelectorAll('.mv-card p');
+  if (mvCards[0] && h.mission) mvCards[0].textContent = h.mission;
+  if (mvCards[1] && h.vision) mvCards[1].textContent = h.vision;
+
+  // ── APPOINTMENT PHONE ALERT ───
+  const apptPhone = document.querySelector('.appt-phone a');
+  if (apptPhone) { apptPhone.href = 'tel:' + ph.replace(/[^\d+]/g,''); apptPhone.textContent = ph; }
+
+  // ── CONTACT PAGE ───
+  const contactPhoneEl = document.querySelector('#page-contact .contact-item a[href^="tel"]');
+  if (contactPhoneEl) { contactPhoneEl.href = 'tel:' + ph.replace(/[^\d+]/g,''); contactPhoneEl.textContent = ph; }
+  const contactEmailEl = document.querySelector('#page-contact .contact-item a[href^="mailto"]');
+  if (contactEmailEl) { contactEmailEl.href = 'mailto:' + em; contactEmailEl.textContent = em; }
+  const contactAddrEl = document.querySelector('#page-contact .contact-item p');
+  if (contactAddrEl && !contactAddrEl.closest('[href]')) contactAddrEl.textContent = addr;
+
+  // ── WORKING HOURS TABLE ───
+  const hoursTable = document.querySelector('.hours-table');
+  if (hoursTable && cms.contact.hours && cms.contact.hours.length) {
+    hoursTable.innerHTML = cms.contact.hours.map((row, i) => {
+      if (row.time === '24/7 Always Open') {
+        return `<tr><td>${row.day}</td><td><span class="badge-247"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ${row.time}</span></td></tr>`;
+      } else if (row.time === 'Emergency Only') {
+        return `<tr><td>${row.day}</td><td><span class="badge-247"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> ${row.time}</span></td></tr>`;
+      }
+      return `<tr><td>${row.day}</td><td>${row.time}</td></tr>`;
+    }).join('');
+  }
+
+  // ── DEPARTMENT SELECT IN APPOINTMENT FORM ───
+  const deptSelect = document.querySelector('.contact-form-box select');
+  if (deptSelect && cms.departments && cms.departments.length) {
+    deptSelect.innerHTML = '<option value="">Select Department</option>';
+    cms.departments.forEach(d => {
+      const o = document.createElement('option');
+      o.textContent = d; o.value = d;
+      deptSelect.appendChild(o);
+    });
+  }
+
+  // ── FOOTER CONTACT ───
+  const footerPhone = document.querySelector('footer .footer-contact-item a[href^="tel"]');
+  if (footerPhone) { footerPhone.href = 'tel:' + ph.replace(/[^\d+]/g,''); footerPhone.textContent = ph; }
+  const footerEmail = document.querySelector('footer .footer-contact-item a[href^="mailto"]');
+  if (footerEmail) { footerEmail.href = 'mailto:' + em; footerEmail.textContent = em; }
+
+  // ── CAREERS HRD EMAIL ───
+  document.querySelectorAll('a[href^="mailto:hrd"]').forEach(a => {
+    a.href = 'mailto:' + hrdEm;
+    if (a.textContent.includes('@')) a.textContent = hrdEm;
+  });
+
+  // ── RENDER DOCTOR CARDS ───
+  renderDoctorCards(cms.doctors);
+});
+
+function renderDoctorCards(doctors) {
+  const grid = document.getElementById('doctorsGrid');
+  if (!grid) return;
+  if (!doctors || !doctors.length) {
+    grid.innerHTML = '<p style="text-align:center;color:var(--muted);padding:40px">No doctor profiles found.</p>';
+    return;
+  }
+  grid.innerHTML = doctors.map(d => {
+    const ph = d.phone || CMS_DEFAULTS.contact.phone;
+    const phLink = 'tel:' + ph.replace(/[^\d+]/g,'');
+    const deptSvg = d.dept === 'Orthopedics'
+      ? '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>'
+      : '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>';
+    const photoHtml = d.photo
+      ? `<img src="doctors/${d.photo}" alt="${d.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+         <div class="doctor-photo-placeholder" style="display:none;"><svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#0a6eb4" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>`
+      : `<div class="doctor-photo-placeholder"><svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="#0a6eb4" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.3"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>`;
+    const scheduleHtml = d.days ? `<div style="font-size:.75rem;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:5px;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${d.days}</div>` : '';
+    const qualHtml = d.qual ? `<div style="font-size:.75rem;color:var(--muted);margin-bottom:4px">${d.qual}</div>` : '';
+    const availClass = d.available ? 'doctor-avail' : 'doctor-avail' ;
+    const availText = d.available ? 'Available' : 'On Leave';
+    const availStyle = d.available ? '' : 'color:#e63946';
+    return `<div class="doctor-card">
+      <div class="doctor-photo-wrap">${photoHtml}</div>
+      <div class="doctor-info">
+        <h3>${d.name}</h3>
+        ${qualHtml}
+        <div class="doctor-dept">${deptSvg} ${d.dept}</div>
+        ${scheduleHtml}
+        <div class="doctor-divider"></div>
+        <div class="doctor-action">
+          <span class="${availClass}" style="${availStyle}">${availText}</span>
+          <a href="${phLink}" class="btn-consult">
+            Book Consult
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ─── PAGE NAVIGATION ────────────────────────────────────────────────────────
+function showPage(name, linkEl) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  if (linkEl) {
+    linkEl.classList.add('active');
+  } else {
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      if (a.getAttribute('onclick') && a.getAttribute('onclick').includes("'" + name + "'")) a.classList.add('active');
+    });
+  }
+  document.getElementById('navLinks').classList.remove('open');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  return false;
+}
+function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
+function handleForm(e) {
+  e.preventDefault();
+  const cms = getCmsData();
+  const ph = cms.contact.phone || '+91 77969 04008';
+  alert('Thank you! Your appointment request has been received.\nWe will contact you shortly.\n\nFor immediate assistance: ' + ph);
+  e.target.reset();
+}
+</script>
+</body>
+</html>
+
