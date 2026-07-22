@@ -13,21 +13,29 @@
     a, button, select { cursor: none; }
     
     /* CUSTOM CURSOR */
-    .custom-cursor {
-      position: fixed; top: 0; left: 0; width: 28px; height: 28px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23e63946' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z'/%3E%3C/svg%3E");
-      background-size: cover; pointer-events: none; z-index: 999999;
+    .custom-cursor, .cursor-trail {
+      position: fixed; top: 0; left: 0; pointer-events: none; z-index: 999999;
       transform: translate(-50%, -50%);
-      transition: width 0.2s, height 0.2s, transform 0.2s;
     }
-    .custom-cursor.hover {
-      transform: translate(-50%, -50%) scale(1.3);
+    .custom-cursor {
+      width: 20px; height: 20px;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230a6eb4' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z'/%3E%3C/svg%3E");
+      background-size: cover;
+      transition: width 0.2s, height 0.2s;
     }
+    .cursor-trail {
+      width: 36px; height: 36px;
+      background: rgba(10, 110, 180, 0.2);
+      border-radius: 50%;
+      transition: width 0.2s, height 0.2s, background 0.2s;
+    }
+    .custom-cursor.hover { width: 26px; height: 26px; }
+    .cursor-trail.hover { width: 50px; height: 50px; background: rgba(10, 110, 180, 0.35); }
+    
     @media (hover: none) and (pointer: coarse), (max-width: 768px) {
       * { cursor: auto !important; }
       html, a, button, select { cursor: auto !important; }
-      .custom-cursor { display: none !important; }
+      .custom-cursor, .cursor-trail { display: none !important; }
     }
     img { max-width: 100%; display: block; }
     svg { display: inline-block; flex-shrink: 0; }
@@ -342,6 +350,7 @@
 
 <!-- CUSTOM CURSOR -->
 <div class="custom-cursor"></div>
+<div class="cursor-trail"></div>
 
 <!-- TOP BAR -->
 <div class="topbar">
@@ -1377,15 +1386,33 @@ function handleForm(e) {
 // ── CUSTOM CURSOR LOGIC ──
 document.addEventListener('DOMContentLoaded', () => {
   const cursor = document.querySelector('.custom-cursor');
-  if(cursor) {
+  const trail = document.querySelector('.cursor-trail');
+  if(cursor && trail) {
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let trailX = mouseX;
+    let trailY = mouseY;
+
     document.addEventListener('mousemove', e => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursor.style.left = mouseX + 'px';
+      cursor.style.top = mouseY + 'px';
     });
+
+    function renderTrail() {
+      trailX += (mouseX - trailX) * 0.2; // Smooth follow speed
+      trailY += (mouseY - trailY) * 0.2;
+      trail.style.left = trailX + 'px';
+      trail.style.top = trailY + 'px';
+      requestAnimationFrame(renderTrail);
+    }
+    renderTrail();
+
     const interactiveEls = document.querySelectorAll('a, button, input, select, textarea, .why-card, .dept-card, .fac-card');
     interactiveEls.forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+      el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); trail.classList.add('hover'); });
+      el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); trail.classList.remove('hover'); });
     });
   }
 });
