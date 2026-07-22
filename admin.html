@@ -366,10 +366,19 @@ input:checked+.tgl-slider::before{background:#fff;transform:translateX(19px)}
   .quick-grid{grid-template-columns:1fr}
   .form-grid,.form-grid.three{grid-template-columns:1fr}
   .span2{grid-column:span 1}
+  .admin-hamburger{display:block !important}
 }
 @media(max-width:600px){
   .dash-stats{grid-template-columns:1fr}
   .content-area{padding:16px}
+  .login-card{padding:32px 24px; border-radius:16px;}
+  .modal{padding:24px 20px;}
+  .dt-header, .dt-row {
+    grid-template-columns: 40px 1fr 100px !important;
+  }
+  .dt-header div:nth-child(4), .dt-header div:nth-child(5), .dt-row div:nth-child(4), .dt-row div:nth-child(5) {
+    display: none;
+  }
 }
 </style>
 </head>
@@ -455,6 +464,9 @@ input:checked+.tgl-slider::before{background:#fff;transform:translateX(19px)}
     <div class="main-wrap">
       <div class="topbar-admin">
         <div class="topbar-left">
+          <div class="admin-hamburger" onclick="toggleAdminMenu()" style="display:none; cursor:pointer; margin-right:14px; padding:4px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e8f2ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </div>
           <div>
             <div class="page-title" id="topTitle">Dashboard</div>
             <div class="breadcrumb">Niramay CMS <span style="opacity:.4">›</span> <span id="topCrumb">Overview</span></div>
@@ -848,6 +860,10 @@ function switchSection(id,navEl){
   if(id==='doctors') renderDoctorsTable();
   if(id==='departments') renderDeptGrid();
   if(id==='dashboard') refreshDashboard();
+  document.getElementById('sidebar').classList.remove('open');
+}
+function toggleAdminMenu(){
+  document.getElementById('sidebar').classList.toggle('open');
 }
 
 // ═════════════════════════════════════════════════════════════
