@@ -464,13 +464,13 @@
       0% { transform: scale(1); opacity: 1; }
       100% { transform: scale(1.4); opacity: 0; }
     }
-    .float-emergency .fe-text {
-      font-size: 0.9rem; font-weight: 800; letter-spacing: 0.02em; white-space: nowrap;
-      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    .float-emergency .fe-label-default {
+      font-size: 0.92rem; font-weight: 800; letter-spacing: 0.02em; white-space: nowrap;
+      display: inline-block; transition: all 0.3s ease;
     }
-    .float-emergency .fe-number {
+    .float-emergency .fe-label-hover {
       font-size: 0.88rem; font-weight: 800; letter-spacing: 0.02em; white-space: nowrap; color: #fff;
-      display: none; transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      display: none; transition: all 0.3s ease;
     }
     @media (min-width: 769px) {
       .float-emergency:hover, .float-emergency.show-num {
@@ -478,12 +478,19 @@
         box-shadow: 0 12px 36px rgba(230,57,70,0.75);
         transform: translateY(-3px) scale(1.04);
       }
-      .float-emergency:hover .fe-text, .float-emergency.show-num .fe-text {
-        display: none;
+      .float-emergency:hover .fe-label-default, .float-emergency.show-num .fe-label-default {
+        display: none !important;
       }
-      .float-emergency:hover .fe-number, .float-emergency.show-num .fe-number {
-        display: inline-block;
+      .float-emergency:hover .fe-label-hover, .float-emergency.show-num .fe-label-hover {
+        display: inline-block !important;
       }
+    }
+    @media (max-width: 768px) {
+      .float-emergency {
+        width: 52px; height: 52px; padding: 0; border-radius: 50%;
+        bottom: 18px; right: 18px;
+      }
+      .float-emergency .fe-label-default, .float-emergency .fe-label-hover { display: none !important; }
     }
 
     /* ── SEVASADAN ASSIST FLOATING WIDGET ── */
@@ -1751,8 +1758,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const hrdEm = cms.contact.hrdEmail || '';
   const addr = cms.contact.address || '';
 
-  // Replace all phone href links
-  document.querySelectorAll('a[href^="tel:"]').forEach(a => {
+  // Replace all phone href links (excluding float-emergency which handles its own hover labels)
+  document.querySelectorAll('a[href^="tel:"]:not(.float-emergency)').forEach(a => {
     const digits = ph.replace(/[^\d+]/g, '');
     a.href = 'tel:' + digits;
     if (a.textContent.includes('+91') || a.textContent.match(/\d{5}/)) a.textContent = ph;
@@ -1839,8 +1846,8 @@ document.addEventListener('DOMContentLoaded', function() {
   if (floatEmgEl) {
     const rawPh = ph.replace(/[^\d+]/g,'');
     floatEmgEl.href = 'tel:' + rawPh;
-    const feNumSpan = floatEmgEl.querySelector('.fe-number');
-    if (feNumSpan) feNumSpan.textContent = 'Emergency number - ' + ph;
+    const feHovSpan = floatEmgEl.querySelector('.fe-label-hover');
+    if (feHovSpan) feHovSpan.textContent = 'Emergency - ' + ph;
 
     floatEmgEl.addEventListener('click', function(e) {
       if (window.innerWidth > 768) {
