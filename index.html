@@ -1753,12 +1753,25 @@ function submitAppt() {
 
   // Sync to Google Sheet via Webhook (if URL provided)
   if (GOOGLE_SHEET_SCRIPT_URL) {
-    fetch(GOOGLE_SHEET_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(appt)
-    }).catch(err => console.error('Sheet Sync Error:', err));
+    try {
+      const payload = new URLSearchParams();
+      payload.append('name', name);
+      payload.append('phone', phone);
+      payload.append('email', appt.email);
+      payload.append('dept', dept);
+      payload.append('date', date);
+      payload.append('time', appt.time);
+      payload.append('message', appt.message);
+
+      fetch(GOOGLE_SHEET_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: payload.toString()
+      }).catch(err => console.error('Sheet Sync Error:', err));
+    } catch (e) {
+      console.error('Sheet Payload Error:', e);
+    }
   }
 
   // Clear form
