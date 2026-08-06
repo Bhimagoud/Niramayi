@@ -444,10 +444,10 @@
     .float-emergency {
       position: fixed; bottom: 28px; right: 28px; z-index: 9998;
       background: linear-gradient(135deg, var(--emergency) 0%, #c1121f 100%); color: #fff;
-      height: 52px; padding: 0 20px; border-radius: 50px;
+      height: 52px; padding: 0 22px; border-radius: 50px;
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
       box-shadow: 0 8px 28px rgba(230,57,70,0.55);
-      text-decoration: none; transition: all 0.38s cubic-bezier(0.2, 0.8, 0.2, 1);
+      text-decoration: none; transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
       cursor: pointer; overflow: hidden;
     }
     .float-emergency::before {
@@ -464,25 +464,13 @@
       0% { transform: scale(1); opacity: 1; }
       100% { transform: scale(1.4); opacity: 0; }
     }
-    .float-emergency .fe-label-default {
-      font-size: 0.92rem; font-weight: 800; letter-spacing: 0.02em; white-space: nowrap;
-      display: inline-block; transition: all 0.3s ease;
-    }
-    .float-emergency .fe-label-hover {
-      font-size: 0.88rem; font-weight: 800; letter-spacing: 0.02em; white-space: nowrap; color: #fff;
-      display: none; transition: all 0.3s ease;
+    .float-emergency .fe-label {
+      font-size: 0.92rem; font-weight: 800; letter-spacing: 0.02em; white-space: nowrap; color: #fff;
     }
     @media (min-width: 769px) {
-      .float-emergency:hover, .float-emergency.show-num {
-        padding: 0 24px;
+      .float-emergency:hover {
         box-shadow: 0 12px 36px rgba(230,57,70,0.75);
-        transform: translateY(-3px) scale(1.04);
-      }
-      .float-emergency:hover .fe-label-default, .float-emergency.show-num .fe-label-default {
-        display: none !important;
-      }
-      .float-emergency:hover .fe-label-hover, .float-emergency.show-num .fe-label-hover {
-        display: inline-block !important;
+        transform: translateY(-3px) scale(1.03);
       }
     }
     @media (max-width: 768px) {
@@ -490,7 +478,7 @@
         width: 52px; height: 52px; padding: 0; border-radius: 50%;
         bottom: 18px; right: 18px;
       }
-      .float-emergency .fe-label-default, .float-emergency .fe-label-hover { display: none !important; }
+      .float-emergency .fe-label { display: none !important; }
     }
 
     /* ── SEVASADAN ASSIST FLOATING WIDGET ── */
@@ -699,8 +687,7 @@
 <!-- ══ FLOATING EMERGENCY BUTTON ══ -->
 <a href="tel:+917276748003" class="float-emergency" id="floatEmg" aria-label="Emergency Call +91 72767 48003">
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34a2 2 0 0 1 2-2.18H7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-  <span class="fe-text">Emergency</span>
-  <span class="fe-number">Emergency number - +91 72767 48003</span>
+  <span class="fe-label" id="feLabel">Emergency</span>
 </a>
 
 <!-- ══ SEVASADAN ASSIST WIDGET ══ -->
@@ -1841,18 +1828,21 @@ document.addEventListener('DOMContentLoaded', function() {
     observer.observe(el);
   });
 
-  // ── FLOATING EMERGENCY PHONE SYNC & TOGGLE ───
+  // ── FLOATING EMERGENCY PHONE SYNC & HOVER TEXT ───
   const floatEmgEl = document.getElementById('floatEmg');
-  if (floatEmgEl) {
+  const feLabel = document.getElementById('feLabel');
+  if (floatEmgEl && feLabel) {
     const rawPh = ph.replace(/[^\d+]/g,'');
     floatEmgEl.href = 'tel:' + rawPh;
-    const feHovSpan = floatEmgEl.querySelector('.fe-label-hover');
-    if (feHovSpan) feHovSpan.textContent = 'Emergency - ' + ph;
+    const defaultText = 'Emergency';
+    const hoverText = 'Emergency - call ' + ph;
 
-    floatEmgEl.addEventListener('click', function(e) {
-      if (window.innerWidth > 768) {
-        floatEmgEl.classList.toggle('show-num');
-      }
+    floatEmgEl.addEventListener('mouseenter', function() {
+      if (window.innerWidth > 768) feLabel.textContent = hoverText;
+    });
+
+    floatEmgEl.addEventListener('mouseleave', function() {
+      if (window.innerWidth > 768) feLabel.textContent = defaultText;
     });
   }
 
