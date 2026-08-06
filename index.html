@@ -577,6 +577,70 @@
         <button onclick="closeApptModal()" style="background:var(--primary);color:#fff;border:none;padding:12px 28px;border-radius:9px;font-weight:700;font-size:0.95rem;cursor:pointer;font-family:inherit;">Done</button>
       </div>
     </div>
+<!-- ══ JOB APPLICATION MODAL ══ -->
+<div class="appt-modal-overlay" id="jobModalOverlay" onclick="closeJobModal(event)">
+  <div class="appt-modal">
+    <div class="appt-modal-head">
+      <h2>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        Apply Online for Career Opportunity
+      </h2>
+      <p>Fill in your details below to apply.</p>
+      <button class="appt-modal-close" onclick="closeJobModal()" aria-label="Close">&times;</button>
+    </div>
+    <div class="appt-modal-body">
+      <div id="jobFormWrap">
+        <div class="appt-form-row">
+          <div class="appt-fg">
+            <label>Full Name <span style="color:#e63946">*</span></label>
+            <input type="text" id="jf_name" placeholder="Your full name" required />
+          </div>
+          <div class="appt-fg">
+            <label>Phone Number <span style="color:#e63946">*</span></label>
+            <input type="tel" id="jf_phone" placeholder="+91 XXXXX XXXXX" required />
+          </div>
+        </div>
+        <div class="appt-fg">
+          <label>Email Address <span style="color:#e63946">*</span></label>
+          <input type="email" id="jf_email" placeholder="your@email.com" required />
+        </div>
+        <div class="appt-fg">
+          <label>Position Applied For <span style="color:#e63946">*</span></label>
+          <select id="jf_position">
+            <option value="">Select Position</option>
+            <option>Doctors (MBBS / MD / MS / DNB)</option>
+            <option>Nurses (GNM / P.B.BSc / BSc Nursing)</option>
+            <option>Lab Technicians (DMLT / BSc MLT)</option>
+            <option>Pharmacists (B.Pharm / D.Pharm)</option>
+            <option>Administrative Staff</option>
+            <option>Ward &amp; Support Staff</option>
+            <option>Other Position</option>
+          </select>
+        </div>
+        <div class="appt-fg">
+          <label>Qualifications &amp; Experience</label>
+          <input type="text" id="jf_qual" placeholder="e.g. BSc Nursing with 3 years ICU experience" />
+        </div>
+        <div class="appt-fg">
+          <label>Cover Note / Message</label>
+          <textarea id="jf_msg" placeholder="Tell us briefly about your background and availability..."></textarea>
+        </div>
+        <div id="jobFormErr" style="display:none;background:#fff0f0;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;font-size:0.82rem;color:#dc2626;margin-bottom:12px;"></div>
+        <button class="appt-submit-btn" onclick="submitJobApp()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Submit Job Application
+        </button>
+      </div>
+      <!-- Success -->
+      <div class="appt-success" id="jobSuccess">
+        <div class="success-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3>Application Submitted!</h3>
+        <p>Thank you! Your job application has been received.<br/>Our HR team will review your application and contact you.</p>
+        <button onclick="closeJobModal()" style="background:var(--primary);color:#fff;border:none;padding:12px 28px;border-radius:9px;font-weight:700;font-size:0.95rem;cursor:pointer;font-family:inherit;">Done</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1123,52 +1187,52 @@
         </div>
 
         <!-- Job cards -->
-        <div class="job-card">
+        <div class="job-card" onclick="openJobModal('Doctors')" style="cursor:pointer;">
           <div class="job-card-left">
             <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
             <div class="job-info"><h4>Doctors</h4><p>MBBS / MD / MS / DNB &nbsp;·&nbsp; Ichalkaranji</p></div>
           </div>
-          <span class="job-badge">Medical</span>
+          <button class="btn-consult" style="margin-left:auto;">Apply</button>
         </div>
 
-        <div class="job-card">
+        <div class="job-card" onclick="openJobModal('Nurses')" style="cursor:pointer;">
           <div class="job-card-left">
             <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
             <div class="job-info"><h4>Nurses</h4><p>GNM / P.B.BSc / BSc Nursing &nbsp;·&nbsp; Ichalkaranji</p></div>
           </div>
-          <span class="job-badge">Nursing</span>
+          <button class="btn-consult" style="margin-left:auto;">Apply</button>
         </div>
 
-        <div class="job-card">
+        <div class="job-card" onclick="openJobModal('Lab Technicians')" style="cursor:pointer;">
           <div class="job-card-left">
             <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg></div>
             <div class="job-info"><h4>Lab Technicians</h4><p>DMLT / BSc MLT &nbsp;·&nbsp; Ichalkaranji</p></div>
           </div>
-          <span class="job-badge">Technical</span>
+          <button class="btn-consult" style="margin-left:auto;">Apply</button>
         </div>
 
-        <div class="job-card">
+        <div class="job-card" onclick="openJobModal('Pharmacists')" style="cursor:pointer;">
           <div class="job-card-left">
             <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
             <div class="job-info"><h4>Pharmacists</h4><p>B.Pharm / D.Pharm &nbsp;·&nbsp; Ichalkaranji</p></div>
           </div>
-          <span class="job-badge">Pharmacy</span>
+          <button class="btn-consult" style="margin-left:auto;">Apply</button>
         </div>
 
-        <div class="job-card">
+        <div class="job-card" onclick="openJobModal('Administrative Staff')" style="cursor:pointer;">
           <div class="job-card-left">
             <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
             <div class="job-info"><h4>Administrative Staff</h4><p>Graduate &nbsp;·&nbsp; Ichalkaranji</p></div>
           </div>
-          <span class="job-badge">Admin</span>
+          <button class="btn-consult" style="margin-left:auto;">Apply</button>
         </div>
 
-        <div class="job-card">
+        <div class="job-card" onclick="openJobModal('Ward & Support Staff')" style="cursor:pointer;">
           <div class="job-card-left">
             <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
             <div class="job-info"><h4>Ward &amp; Support Staff</h4><p>Relevant Experience &nbsp;·&nbsp; Ichalkaranji</p></div>
           </div>
-          <span class="job-badge">Support</span>
+          <button class="btn-consult" style="margin-left:auto;">Apply</button>
         </div>
 
         <div style="margin-top:28px; padding:22px; background:#fff7e6; border-radius:12px; border-left:4px solid #ffd166; display:flex; align-items:center; gap:14px;">
@@ -1201,10 +1265,10 @@
             Apply Online
           </h4>
           <p>Fill out the official Job Application Form — takes just a few minutes.</p>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSflC0i_6OExOL3dbHDiZC9BdG334_MilARVM-NLiYXpyAN8zw/viewform?usp=dialog" class="btn-apply-white" target="_blank">
+          <button onclick="openJobModal()" class="btn-apply-white" style="cursor:pointer;border:none;width:100%;font-family:inherit;">
             Apply Now
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
+          </button>
         </div>
         <div style="margin-top:16px; background:#fff; border:1px solid var(--border); border-radius:14px; padding:22px;">
           <h4 style="font-weight:700; margin-bottom:12px; font-size:0.95rem; display:flex; align-items:center; gap:8px;">
@@ -1789,9 +1853,110 @@ function submitAppt() {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     document.getElementById('apptModalOverlay').classList.remove('open');
+    const jobOverlay = document.getElementById('jobModalOverlay');
+    if (jobOverlay) jobOverlay.classList.remove('open');
     document.body.style.overflow = '';
   }
 });
+
+// ─── JOB APPLICATION MODAL ───────────────────────────────────────────────────
+function openJobModal(positionName) {
+  const overlay = document.getElementById('jobModalOverlay');
+  if (!overlay) return;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('jobFormWrap').style.display = '';
+  document.getElementById('jobSuccess').style.display = 'none';
+  document.getElementById('jobFormErr').style.display = 'none';
+  
+  if (positionName) {
+    const sel = document.getElementById('jf_position');
+    if (sel) {
+      for (let i = 0; i < sel.options.length; i++) {
+        if (sel.options[i].text.toLowerCase().includes(positionName.toLowerCase())) {
+          sel.selectedIndex = i;
+          break;
+        }
+      }
+    }
+  }
+}
+
+function closeJobModal(e) {
+  if (e && e.target !== document.getElementById('jobModalOverlay')) return;
+  const overlay = document.getElementById('jobModalOverlay');
+  if (overlay) overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function submitJobApp() {
+  const name  = document.getElementById('jf_name').value.trim();
+  const phone = document.getElementById('jf_phone').value.trim();
+  const email = document.getElementById('jf_email').value.trim();
+  const pos   = document.getElementById('jf_position').value;
+  const qual  = document.getElementById('jf_qual').value.trim();
+  const msg   = document.getElementById('jf_msg').value.trim();
+  const errEl = document.getElementById('jobFormErr');
+
+  if (!name || !phone || !email || !pos) {
+    errEl.textContent = 'Please fill in Name, Phone, Email, and Position Applied For.';
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+
+  const fullMsg = (qual ? 'Qualification: ' + qual + ' | Notes: ' : '') + msg;
+  const todayStr = new Date().toISOString().split('T')[0];
+
+  const appt = {
+    id:        'JOB-' + Date.now(),
+    timestamp: new Date().toISOString(),
+    name, phone, email,
+    dept:    'Career: ' + pos,
+    date:    todayStr,
+    time:    'Job Application',
+    message: fullMsg,
+    status:  'Pending'
+  };
+
+  // Save to localStorage (shows up in Admin Panel under Appointments)
+  const existing = JSON.parse(localStorage.getItem(APPT_KEY) || '[]');
+  existing.unshift(appt);
+  localStorage.setItem(APPT_KEY, JSON.stringify(existing));
+
+  // Sync to Google Sheet via Webhook
+  if (GOOGLE_SHEET_SCRIPT_URL) {
+    try {
+      const payload = new URLSearchParams();
+      payload.append('name', name);
+      payload.append('phone', phone);
+      payload.append('email', email);
+      payload.append('dept', 'Career: ' + pos);
+      payload.append('date', todayStr);
+      payload.append('time', 'Job Application');
+      payload.append('message', fullMsg);
+
+      fetch(GOOGLE_SHEET_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: payload.toString()
+      }).catch(err => console.error('Sheet Sync Error:', err));
+    } catch (e) {
+      console.error('Sheet Payload Error:', e);
+    }
+  }
+
+  // Clear form
+  ['jf_name','jf_phone','jf_email','jf_position','jf_qual','jf_msg'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+
+  // Show success
+  document.getElementById('jobFormWrap').style.display = 'none';
+  document.getElementById('jobSuccess').style.display = 'block';
+}
 </script>
 </body>
 </html>
