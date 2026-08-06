@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sevasadan Niramay Pvt. Ltd. – Quality Healthcare, Ichalkaranji</title>
-  <meta name="description" content="Sevasadan Niramay Pvt. Ltd. – Committed to delivering quality healthcare with compassion, integrity, and excellence in Ichalkaranji, Maharashtra." />
+  <title>Sevasadan Hospital Ichalkaranji – SEVASADAN NIRAMAY PVT. LTD.</title>
+  <meta name="description" content="SEVASADAN NIRAMAY PVT. LTD. – Healthcare With Human Touch. Quality multi-speciality healthcare at 691/1, Ring Road, Near Bohara Market, Ichalkaranji, Maharashtra." />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -333,6 +333,147 @@
     }
     .btn-consult:hover { background: var(--primary); color: #fff; }
 
+    /* ── FLOATING EMERGENCY BUTTON ── */
+    .float-emergency {
+      position: fixed; bottom: 28px; right: 28px; z-index: 9998;
+      background: var(--emergency); color: #fff;
+      width: 60px; height: 60px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 24px rgba(230,57,70,0.5);
+      text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .float-emergency:hover { transform: scale(1.12); box-shadow: 0 10px 32px rgba(230,57,70,0.65); color: #fff; }
+    .float-emergency::before {
+      content: '';
+      position: absolute; inset: -6px;
+      border-radius: 50%; border: 2px solid rgba(230,57,70,0.4);
+      animation: emg-pulse 2s ease-out infinite;
+    }
+    .float-emergency::after {
+      content: '';
+      position: absolute; inset: -12px;
+      border-radius: 50%; border: 2px solid rgba(230,57,70,0.2);
+      animation: emg-pulse 2s ease-out infinite 0.4s;
+    }
+    @keyframes emg-pulse {
+      0% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(1.5); opacity: 0; }
+    }
+    .float-emergency .fe-label {
+      position: absolute; right: 70px; top: 50%; transform: translateY(-50%);
+      background: #1a2340; color: #fff; font-size: 0.75rem; font-weight: 700;
+      padding: 6px 12px; border-radius: 6px; white-space: nowrap;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .float-emergency:hover .fe-label { opacity: 1; }
+
+    /* ── APPOINTMENT MODAL ── */
+    .appt-modal-overlay {
+      position: fixed; inset: 0; background: rgba(5,15,35,0.82);
+      backdrop-filter: blur(6px); z-index: 99990;
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px; opacity: 0; pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .appt-modal-overlay.open { opacity: 1; pointer-events: all; }
+    .appt-modal {
+      background: #fff; border-radius: 20px; width: 100%; max-width: 560px;
+      max-height: 92vh; overflow-y: auto;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.35);
+      transform: translateY(20px) scale(0.97);
+      transition: transform 0.28s cubic-bezier(0.2,0.8,0.2,1);
+    }
+    .appt-modal-overlay.open .appt-modal { transform: none; }
+    .appt-modal-head {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: #fff; padding: 28px 30px 24px; border-radius: 20px 20px 0 0;
+      position: relative;
+    }
+    .appt-modal-head h2 { font-size: 1.3rem; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
+    .appt-modal-head p { font-size: 0.87rem; opacity: 0.85; }
+    .appt-modal-close {
+      position: absolute; top: 16px; right: 18px;
+      background: rgba(255,255,255,0.15); border: none; color: #fff;
+      width: 34px; height: 34px; border-radius: 8px; font-size: 1.1rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .appt-modal-close:hover { background: rgba(255,255,255,0.28); }
+    .appt-modal-body { padding: 28px 30px; }
+    .appt-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .appt-fg { margin-bottom: 14px; }
+    .appt-fg label { display: block; font-size: 0.78rem; font-weight: 700; color: var(--muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .appt-fg input, .appt-fg select, .appt-fg textarea {
+      width: 100%; border: 1.5px solid var(--border); border-radius: 9px;
+      padding: 11px 14px; font-size: 0.9rem; font-family: inherit;
+      color: var(--text); outline: none; transition: border 0.2s;
+      background: #f8fbff;
+    }
+    .appt-fg input:focus, .appt-fg select:focus, .appt-fg textarea:focus { border-color: var(--primary); background: #fff; }
+    .appt-fg textarea { resize: vertical; min-height: 80px; }
+    .appt-submit-btn {
+      width: 100%; background: var(--primary); color: #fff; border: none;
+      padding: 14px; border-radius: 10px; font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: background 0.2s; font-family: inherit;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      margin-top: 4px;
+    }
+    .appt-submit-btn:hover { background: var(--primary-dark); }
+    .appt-success {
+      display: none; text-align: center; padding: 24px 10px 10px;
+    }
+    .appt-success .success-icon {
+      width: 70px; height: 70px; background: #e8fdf0; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;
+    }
+    .appt-success h3 { font-size: 1.3rem; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+    .appt-success p { color: var(--muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 18px; }
+    .appt-or-divider { display: flex; align-items: center; gap: 14px; margin: 18px 0 14px; }
+    .appt-or-divider span { font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
+    .appt-or-divider::before, .appt-or-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .btn-gform {
+      width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;
+      border: 2px solid var(--border); color: var(--text); background: #fff;
+      padding: 12px; border-radius: 9px; font-size: 0.9rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; font-family: inherit; text-decoration: none;
+    }
+    .btn-gform:hover { border-color: var(--primary); color: var(--primary); background: var(--light-bg); }
+
+    /* ── NAV BOOK BTN ── */
+    .nav-book-btn {
+      background: var(--primary); color: #fff; padding: 9px 18px; border-radius: 8px;
+      font-weight: 700; font-size: 0.85rem; display: flex; align-items: center; gap: 7px;
+      transition: background 0.2s; white-space: nowrap; border: none; cursor: pointer;
+      font-family: inherit;
+    }
+    .nav-book-btn:hover { background: var(--primary-dark); color: #fff; }
+
+    /* ── SERVICES IMAGE CARDS ── */
+    .svc-img-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px; }
+    .svc-img-card {
+      border-radius: 14px; overflow: hidden; position: relative;
+      height: 200px; background-size: cover; background-position: center;
+      box-shadow: 0 4px 16px rgba(10,79,138,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .svc-img-card:hover { transform: translateY(-5px); box-shadow: 0 16px 32px rgba(10,79,138,0.18); }
+    .svc-img-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(8,42,80,0.88) 0%, rgba(8,42,80,0.3) 50%, rgba(8,42,80,0) 100%);
+    }
+    .svc-img-card .sic-body {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 16px 18px; color: #fff;
+    }
+    .svc-img-card .sic-icon {
+      width: 36px; height: 36px; background: rgba(255,255,255,0.18);
+      border-radius: 9px; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 8px; backdrop-filter: blur(4px);
+    }
+    .svc-img-card .sic-name { font-size: 0.92rem; font-weight: 700; line-height: 1.3; }
+    .svc-img-card .sic-desc { font-size: 0.74rem; opacity: 0.8; margin-top: 3px; }
+
     @media (max-width: 900px) { .doctors-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 768px) {
       .nav-links, .nav-cta { display: none; }
@@ -343,10 +484,101 @@
       .footer-grid { grid-template-columns: 1fr 1fr; }
       .preventive-grid { grid-template-columns: 1fr; }
       .doctors-grid { grid-template-columns: 1fr; }
+      .appt-form-row { grid-template-columns: 1fr; }
+      .float-emergency { bottom: 18px; right: 18px; width: 54px; height: 54px; }
+      .svc-img-grid { grid-template-columns: 1fr 1fr; }
     }
+    @media (max-width: 480px) { .svc-img-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
+
+<!-- ══ FLOATING EMERGENCY BUTTON ══ -->
+<a href="tel:+917276748003" class="float-emergency" id="floatEmg" aria-label="Emergency Call">
+  <span class="fe-label">Emergency Call</span>
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34a2 2 0 0 1 2-2.18H7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+</a>
+
+<!-- ══ APPOINTMENT MODAL ══ -->
+<div class="appt-modal-overlay" id="apptModalOverlay" onclick="closeApptModal(event)">
+  <div class="appt-modal">
+    <div class="appt-modal-head">
+      <h2>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book an Appointment
+      </h2>
+      <p>Fill in the details and we'll confirm your slot.</p>
+      <button class="appt-modal-close" onclick="closeApptModal()" aria-label="Close">&times;</button>
+    </div>
+    <div class="appt-modal-body">
+      <!-- Form -->
+      <div id="apptFormWrap">
+        <div class="appt-form-row">
+          <div class="appt-fg">
+            <label>Full Name <span style="color:#e63946">*</span></label>
+            <input type="text" id="af_name" placeholder="Your full name" required />
+          </div>
+          <div class="appt-fg">
+            <label>Phone Number <span style="color:#e63946">*</span></label>
+            <input type="tel" id="af_phone" placeholder="+91 XXXXX XXXXX" required />
+          </div>
+        </div>
+        <div class="appt-fg">
+          <label>Email Address (optional)</label>
+          <input type="email" id="af_email" placeholder="your@email.com" />
+        </div>
+        <div class="appt-fg">
+          <label>Department <span style="color:#e63946">*</span></label>
+          <select id="af_dept">
+            <option value="">Select Department</option>
+            <option>General Medicine</option>
+            <option>Cardiology</option>
+            <option>General Surgery</option>
+            <option>Urology</option>
+            <option>Ophthalmology</option>
+            <option>Pediatrics</option>
+            <option>Emergency &amp; Critical Care</option>
+            <option>Orthopedic</option>
+            <option>CVTS (Cardiovascular &amp; Thoracic Surgery)</option>
+          </select>
+        </div>
+        <div class="appt-form-row">
+          <div class="appt-fg">
+            <label>Preferred Date <span style="color:#e63946">*</span></label>
+            <input type="date" id="af_date" />
+          </div>
+          <div class="appt-fg">
+            <label>Preferred Time</label>
+            <select id="af_time">
+              <option value="">Any Time</option>
+              <option>Morning (9 AM – 12 PM)</option>
+              <option>Afternoon (12 PM – 4 PM)</option>
+              <option>Evening (4 PM – 8 PM)</option>
+            </select>
+          </div>
+        </div>
+        <div class="appt-fg">
+          <label>Symptoms / Message</label>
+          <textarea id="af_msg" placeholder="Describe your symptoms or reason for visit..."></textarea>
+        </div>
+        <div id="apptFormErr" style="display:none;background:#fff0f0;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;font-size:0.82rem;color:#dc2626;margin-bottom:12px;"></div>
+        <button class="appt-submit-btn" onclick="submitAppt()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Submit Appointment
+        </button>
+      </div>
+      <!-- Success -->
+      <div class="appt-success" id="apptSuccess">
+        <div class="success-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3>Appointment Requested!</h3>
+        <p>Thank you! Your appointment request has been received.<br/>Our team will call you to confirm the slot.</p>
+        <button onclick="closeApptModal()" style="background:var(--primary);color:#fff;border:none;padding:12px 28px;border-radius:9px;font-weight:700;font-size:0.95rem;cursor:pointer;font-family:inherit;">Done</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- CUSTOM CURSOR -->
 <div class="custom-cursor"></div>
@@ -365,7 +597,7 @@
     </div>
     <div class="item emergency">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffd166" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34a2 2 0 0 1 2-2.18H7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      <a href="tel:+917796904008">Emergency: +91 77969 04008</a>
+      <a href="tel:+917276748003">Emergency: +91 72767 48003</a>
     </div>
   </div>
 </div>
@@ -378,8 +610,8 @@
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
       </div>
       <div class="logo-text">
-        <div class="name">Sevasadan Niramay</div>
-        <div class="tagline">Pvt. Ltd. — Ichalkaranji</div>
+        <div class="name">SEVASADAN NIRAMAY PVT. LTD.</div>
+        <div class="tagline">Healthcare With Human Touch</div>
       </div>
     </div>
     <ul class="nav-links" id="navLinks">
@@ -389,10 +621,16 @@
       <li><a href="#" onclick="showPage('careers',this)">Careers</a></li>
       <li><a href="#" onclick="showPage('contact',this)">Contact Us</a></li>
     </ul>
-    <a href="tel:+917796904008" class="nav-cta">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34a2 2 0 0 1 2-2.18H7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      Call Now
-    </a>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button class="nav-book-btn" onclick="openApptModal()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Book Appointment
+      </button>
+      <a href="tel:+917276748003" class="nav-cta">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34a2 2 0 0 1 2-2.18H7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Emergency
+      </a>
+    </div>
     <div class="hamburger" onclick="toggleMenu()" id="hamburger">
       <span></span><span></span><span></span>
     </div>
@@ -411,13 +649,13 @@
       <h1 class="fade-up">Your Health is<br/><span>Our Responsibility</span></h1>
       <p class="fade-up delay-1">At Sevasadan Niramay Pvt. Ltd., we deliver quality healthcare with compassion, integrity, and excellence — equipped with modern facilities and a dedicated medical team.</p>
       <div class="hero-btns fade-up delay-2">
-        <a href="tel:+917796904008" class="btn-primary">
+        <button onclick="openApptModal()" class="btn-primary" style="cursor:pointer;border:none;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Book Appointment
+        </button>
+        <a href="tel:+917276748003" class="btn-outline">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34a2 2 0 0 1 2-2.18H7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          +91 77969 04008
-        </a>
-        <a href="#" onclick="showPage('services',null)" class="btn-outline">
-          Explore Services
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          Emergency Call
         </a>
       </div>
       <div class="hero-stats">
@@ -448,7 +686,7 @@
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
             About Us
           </div>
-          <h2 class="section-title">Welcome to Sevasadan Niramay Pvt. Ltd.</h2>
+          <h2 class="section-title">Welcome to SEVASADAN NIRAMAY PVT. LTD.</h2>
           <div class="divider"></div>
           <p>At Sevasadan Niramay Pvt. Ltd., we are committed to delivering quality healthcare services with compassion, integrity, and excellence. Our hospital is equipped with modern medical facilities and a dedicated team of doctors, nurses, and healthcare professionals.</p>
           <p>We ensure the best possible care for every patient — from routine consultations to specialized treatments and emergency services, all under one roof in Ichalkaranji.</p>
@@ -637,11 +875,11 @@
       <p>Our team is available 24 hours a day, 7 days a week. Don't wait — reach out now.</p>
       <div class="appt-phone">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffd166" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34a2 2 0 0 1 2-2.18H7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        <a href="tel:+917796904008" style="color:#ffd166;">+91 77969 04008</a>
+        <a href="tel:+917276748003" style="color:#ffd166;">+91 72767 48003</a>
       </div>
       <div class="appt-btns">
-        <a href="tel:+917796904008" class="btn-primary">Call Now</a>
-        <a href="https://wa.me/917796904008?text=Hello%2C%20I%20need%20a%20medical%20consultation." class="btn-whatsapp" target="_blank">
+        <a href="tel:+917276748003" class="btn-primary">Call Now</a>
+        <a href="https://wa.me/917276748003?text=Hello%2C%20I%20need%20a%20medical%20consultation." class="btn-whatsapp" target="_blank">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           WhatsApp
         </a>
@@ -705,11 +943,71 @@
       </div>
     </div>
 
-    <!-- Medical Departments -->
+    <!-- Our Services – Image Cards -->
+    <div class="service-section">
+      <div class="service-section-title">
+        <div class="s-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        Our Services
+      </div>
+      <p class="sub">Comprehensive clinical, diagnostic, and support services — all under one roof.</p>
+      <div class="svc-img-grid">
+        <div class="svc-img-card" style="background-image:url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=700')">
+          <div class="sic-body">
+            <div class="sic-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+            <div class="sic-name">Clinical Services</div>
+            <div class="sic-desc">Expert consultations &amp; inpatient care</div>
+          </div>
+        </div>
+        <div class="svc-img-card" style="background-image:url('https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=700')">
+          <div class="sic-body">
+            <div class="sic-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+            <div class="sic-name">Diagnostic Services</div>
+            <div class="sic-desc">X-Ray, CT, Ultrasound &amp; more</div>
+          </div>
+        </div>
+        <div class="svc-img-card" style="background-image:url('https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&q=80&w=700')">
+          <div class="sic-body">
+            <div class="sic-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg></div>
+            <div class="sic-name">Pathology Services</div>
+            <div class="sic-desc">Lab tests &amp; rapid reports</div>
+          </div>
+        </div>
+        <div class="svc-img-card" style="background-image:url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=700')">
+          <div class="sic-body">
+            <div class="sic-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div class="sic-name">TPA &amp; Insurance</div>
+            <div class="sic-desc">Cashless &amp; insurance assistance</div>
+          </div>
+        </div>
+        <div class="svc-img-card" style="background-image:url('https://images.unsplash.com/photo-1587745416684-47953f16f02f?auto=format&fit=crop&q=80&w=700')">
+          <div class="sic-body">
+            <div class="sic-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+            <div class="sic-name">Emergency Services</div>
+            <div class="sic-desc">24×7 trauma &amp; critical response</div>
+          </div>
+        </div>
+        <div class="svc-img-card" style="background-image:url('https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=700')">
+          <div class="sic-body">
+            <div class="sic-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+            <div class="sic-name">24×7 Pharmacy</div>
+            <div class="sic-desc">Round-the-clock medication</div>
+          </div>
+        </div>
+        <div class="svc-img-card" style="background-image:url('https://images.unsplash.com/photo-1563213126-a4273aed2016?auto=format&fit=crop&q=80&w=700')">
+          <div class="sic-body">
+            <div class="sic-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+            <div class="sic-name">Ambulance Services</div>
+            <div class="sic-desc">Swift transport &amp; pre-hospital care</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Medical Departments / Specialities -->
     <div class="service-section">
       <div class="service-section-title">
         <div class="s-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-        Medical Departments
+        Specialities &amp; Departments
       </div>
       <p class="sub">Specialized treatment through our comprehensive range of clinical departments.</p>
       <div class="dept-grid">
@@ -719,29 +1017,26 @@
         <div class="dept-card fade-up delay-2" style="background-image: url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=600')">
           <div class="dept-name">Cardiology</div>
         </div>
-        <div class="dept-card fade-up delay-3" style="background-image: url('https://images.unsplash.com/photo-1579108736484-934d40b95eb7?auto=format&fit=crop&q=80&w=600')">
+        <div class="dept-card fade-up delay-3" style="background-image: url('https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=600')">
+          <div class="dept-name">General Surgery</div>
+        </div>
+        <div class="dept-card fade-up delay-1" style="background-image: url('https://images.unsplash.com/photo-1579108736484-934d40b95eb7?auto=format&fit=crop&q=80&w=600')">
           <div class="dept-name">Urology</div>
-        </div>
-        <div class="dept-card fade-up delay-1" style="background-image: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&q=80&w=600')">
-          <div class="dept-name">Nephrology</div>
-        </div>
-        <div class="dept-card fade-up delay-2" style="background-image: url('https://images.unsplash.com/photo-1531983412531-1f49a365ffed?auto=format&fit=crop&q=80&w=600')">
-          <div class="dept-name">Obstetrics &amp; Gynecology</div>
-        </div>
-        <div class="dept-card fade-up delay-3" style="background-image: url('https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&q=80&w=600')">
-          <div class="dept-name">Orthopedics</div>
-        </div>
-        <div class="dept-card fade-up delay-1" style="background-image: url('https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&q=80&w=600')">
-          <div class="dept-name">Pediatrics</div>
         </div>
         <div class="dept-card fade-up delay-2" style="background-image: url('https://images.unsplash.com/photo-1616423641405-b0b979502b42?auto=format&fit=crop&q=80&w=600')">
           <div class="dept-name">Ophthalmology</div>
         </div>
-        <div class="dept-card fade-up delay-3" style="background-image: url('https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&q=80&w=600')">
-          <div class="dept-name">General Surgery</div>
+        <div class="dept-card fade-up delay-3" style="background-image: url('https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&q=80&w=600')">
+          <div class="dept-name">Pediatrics</div>
         </div>
         <div class="dept-card fade-up delay-1" style="background-image: url('https://images.unsplash.com/photo-1587745416684-47953f16f02f?auto=format&fit=crop&q=80&w=600')">
-          <div class="dept-name">Emergency Care</div>
+          <div class="dept-name">Emergency &amp; Critical Care</div>
+        </div>
+        <div class="dept-card fade-up delay-2" style="background-image: url('https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&q=80&w=600')">
+          <div class="dept-name">Orthopedic</div>
+        </div>
+        <div class="dept-card fade-up delay-3" style="background-image: url('https://images.unsplash.com/photo-1530026186672-2cd00ffc50fe?auto=format&fit=crop&q=80&w=600')">
+          <div class="dept-name">CVTS – Cardiovascular &amp; Thoracic Surgery</div>
         </div>
       </div>
     </div>
@@ -800,7 +1095,7 @@
           </h3>
           <p>Basic Emergency Care &nbsp;·&nbsp; First Aid &amp; Stabilization &nbsp;·&nbsp; Immediate Medical Response<br/>Our emergency team handles all critical situations with speed and precision.</p>
         </div>
-        <a href="tel:+917796904008" class="btn-emergency">
+        <a href="tel:+917276748003" class="btn-emergency">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34a2 2 0 0 1 2-2.18H7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           Call Emergency
         </a>
@@ -814,9 +1109,9 @@
   <div class="careers-hero">
     <h1>
       <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-      Careers at Sevasadan Niramay
+      Career Opportunities at SEVASADAN NIRAMAY PVT. LTD.
     </h1>
-    <p>Join our dedicated healthcare team. Be part of a mission-driven organization committed to quality, ethics, and compassionate patient care.</p>
+    <p>SEVASADAN NIRAMAY PVT. LTD. welcomes dedicated and passionate healthcare professionals to join our team. Be part of a mission-driven organisation committed to quality, ethics, and compassionate patient care.</p>
   </div>
 
   <div class="careers-content">
@@ -830,82 +1125,50 @@
         <!-- Job cards -->
         <div class="job-card">
           <div class="job-card-left">
-            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
-            <div class="job-info"><h4>Staff Nurse</h4><p>GNM / P.B.BSc / BSc Nursing &nbsp;·&nbsp; Ichalkaranji</p></div>
-          </div>
-          <span class="job-badge">Nursing</span>
-        </div>
-
-        <div class="job-card">
-          <div class="job-card-left">
-            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-            <div class="job-info"><h4>RMO (Resident Medical Officer)</h4><p>BHMS / BAMS &nbsp;·&nbsp; Ichalkaranji</p></div>
+            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+            <div class="job-info"><h4>Doctors</h4><p>MBBS / MD / MS / DNB &nbsp;·&nbsp; Ichalkaranji</p></div>
           </div>
           <span class="job-badge">Medical</span>
         </div>
 
         <div class="job-card">
           <div class="job-card-left">
-            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-            <div class="job-info"><h4>Consultant</h4><p>MBBS / MD / MS (Surgery) &nbsp;·&nbsp; Ichalkaranji</p></div>
+            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+            <div class="job-info"><h4>Nurses</h4><p>GNM / P.B.BSc / BSc Nursing &nbsp;·&nbsp; Ichalkaranji</p></div>
           </div>
-          <span class="job-badge">Senior</span>
+          <span class="job-badge">Nursing</span>
+        </div>
+
+        <div class="job-card">
+          <div class="job-card-left">
+            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg></div>
+            <div class="job-info"><h4>Lab Technicians</h4><p>DMLT / BSc MLT &nbsp;·&nbsp; Ichalkaranji</p></div>
+          </div>
+          <span class="job-badge">Technical</span>
+        </div>
+
+        <div class="job-card">
+          <div class="job-card-left">
+            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+            <div class="job-info"><h4>Pharmacists</h4><p>B.Pharm / D.Pharm &nbsp;·&nbsp; Ichalkaranji</p></div>
+          </div>
+          <span class="job-badge">Pharmacy</span>
         </div>
 
         <div class="job-card">
           <div class="job-card-left">
             <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
-            <div class="job-info"><h4>Receptionist</h4><p>Graduate &nbsp;·&nbsp; Ichalkaranji</p></div>
+            <div class="job-info"><h4>Administrative Staff</h4><p>Graduate &nbsp;·&nbsp; Ichalkaranji</p></div>
           </div>
           <span class="job-badge">Admin</span>
         </div>
 
         <div class="job-card">
           <div class="job-card-left">
-            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-            <div class="job-info"><h4>Cath Lab Technician</h4><p>Relevant Certification / Degree &nbsp;·&nbsp; Ichalkaranji</p></div>
-          </div>
-          <span class="job-badge">Technical</span>
-        </div>
-
-        <div class="job-card">
-          <div class="job-card-left">
-            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg></div>
-            <div class="job-info"><h4>Lab Incharge</h4><p>DMLT / BSc MLT &nbsp;·&nbsp; Ichalkaranji</p></div>
-          </div>
-          <span class="job-badge">Technical</span>
-        </div>
-
-        <div class="job-card">
-          <div class="job-card-left">
-            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
-            <div class="job-info"><h4>X-Ray Technician</h4><p>DMRT / BSc Radiology &nbsp;·&nbsp; Ichalkaranji</p></div>
-          </div>
-          <span class="job-badge">Technical</span>
-        </div>
-
-        <div class="job-card">
-          <div class="job-card-left">
-            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-            <div class="job-info"><h4>Electrician</h4><p>ITI / Diploma &nbsp;·&nbsp; Ichalkaranji</p></div>
-          </div>
-          <span class="job-badge">Maintenance</span>
-        </div>
-
-        <div class="job-card">
-          <div class="job-card-left">
-            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
-            <div class="job-info"><h4>Driver</h4><p>Valid License Required &nbsp;·&nbsp; Ichalkaranji</p></div>
+            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+            <div class="job-info"><h4>Ward &amp; Support Staff</h4><p>Relevant Experience &nbsp;·&nbsp; Ichalkaranji</p></div>
           </div>
           <span class="job-badge">Support</span>
-        </div>
-
-        <div class="job-card">
-          <div class="job-card-left">
-            <div class="job-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-            <div class="job-info"><h4>Maintenance Executive</h4><p>Relevant Experience &nbsp;·&nbsp; Ichalkaranji</p></div>
-          </div>
-          <span class="job-badge">Maintenance</span>
         </div>
 
         <div style="margin-top:28px; padding:22px; background:#fff7e6; border-radius:12px; border-left:4px solid #ffd166; display:flex; align-items:center; gap:14px;">
@@ -949,7 +1212,7 @@
             HR Department
           </h4>
           <p style="font-size:0.85rem; color:var(--muted); line-height:1.6; margin-bottom:10px;">For recruitment queries, contact HR during working hours.</p>
-          <a href="tel:+917796904008" style="display:flex; align-items:center; gap:6px; font-weight:700; color:var(--primary); font-size:0.9rem;">+91 77969 04008</a>
+          <a href="tel:+917276748003" style="display:flex; align-items:center; gap:6px; font-weight:700; color:var(--primary); font-size:0.9rem;">+91 72767 48003</a>
         </div>
       </div>
     </div>
@@ -972,11 +1235,11 @@
         <h2>Get In Touch</h2>
         <div class="contact-item">
           <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-          <div><h4>Location</h4><p><a href="https://maps.app.goo.gl/RxM8PZNNBerz1gj57" target="_blank" style="text-decoration:underline; font-weight:600;"><span data-cms="address">Ichalkaranji, Maharashtra, India</span></a></p></div>
+          <div><h4>Location</h4><p><a href="https://maps.app.goo.gl/RxM8PZNNBerz1gj57" target="_blank" style="text-decoration:underline; font-weight:600;"><span data-cms="address">691/1, Ring Road, Near Bohara Market, Ichalkaranji</span></a></p></div>
         </div>
         <div class="contact-item">
           <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34a2 2 0 0 1 2-2.18H7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-          <div><h4>Phone</h4><a href="tel:+917796904008">+91 77969 04008</a></div>
+          <div><h4>Phone</h4><a href="tel:+917276748003">+91 72767 48003</a></div>
         </div>
         <div class="contact-item">
           <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
@@ -984,7 +1247,7 @@
         </div>
         <div class="contact-item">
           <div class="contact-icon" style="background:#fff0f1;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--emergency)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-          <div><h4>Emergency</h4><a href="tel:+917796904008" style="color:var(--emergency); font-weight:700;">24/7 Emergency: +91 77969 04008</a></div>
+          <div><h4>Emergency</h4><a href="tel:+917276748003" style="color:var(--emergency); font-weight:700;">24/7 Emergency: +91 72767 48003</a></div>
         </div>
 
         <h3 style="font-size:0.95rem; font-weight:700; margin-top:8px; margin-bottom:4px; display:flex; align-items:center; gap:8px;">
@@ -999,7 +1262,7 @@
 
         <div style="margin-top:24px; background:var(--light-bg); border-radius:12px; padding:18px; border:1px solid var(--border);">
           <p style="font-size:0.86rem; color:var(--muted); margin-bottom:12px;">Connect on WhatsApp for quick queries:</p>
-          <a href="https://wa.me/917796904008?text=Hello%2C%20I%20need%20a%20consultation." class="btn-whatsapp" target="_blank" style="display:inline-flex; font-size:0.88rem; padding:10px 18px;">
+          <a href="https://wa.me/917276748003?text=Hello%2C%20I%20need%20a%20consultation." class="btn-whatsapp" target="_blank" style="display:inline-flex; font-size:0.88rem; padding:10px 18px;">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             Chat on WhatsApp
           </a>
@@ -1074,8 +1337,8 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="tagline-badge">Your Health. Our Responsibility.</div>
-        <div class="name">Sevasadan Niramay Pvt. Ltd.</div>
-        <p>A multi-speciality healthcare institution committed to delivering quality, ethical, and compassionate medical services in Ichalkaranji, Maharashtra.</p>
+        <div class="name">SEVASADAN NIRAMAY PVT. LTD.</div>
+        <p>Healthcare With Human Touch. A multi-speciality healthcare institution at 691/1, Ring Road, Near Bohara Market, Ichalkaranji, committed to quality, ethical, and compassionate medical services.</p>
       </div>
       <div class="footer-col">
         <h4>Quick Links</h4>
@@ -1088,25 +1351,27 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Departments</h4>
+        <h4>Specialities</h4>
         <ul>
           <li><a href="#">General Medicine</a></li>
           <li><a href="#">Cardiology</a></li>
-          <li><a href="#">Orthopedics</a></li>
-          <li><a href="#">Nephrology</a></li>
-          <li><a href="#">Pediatrics</a></li>
           <li><a href="#">General Surgery</a></li>
+          <li><a href="#">Urology</a></li>
+          <li><a href="#">Ophthalmology</a></li>
+          <li><a href="#">Pediatrics</a></li>
+          <li><a href="#">Orthopedic</a></li>
+          <li><a href="#">CVTS</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
         <div class="footer-contact-item">
           <div class="fi-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9bb5cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-          <span>Ichalkaranji, Maharashtra</span>
+          <span>691/1, Ring Road, Near Bohara Market, Ichalkaranji</span>
         </div>
         <div class="footer-contact-item">
           <div class="fi-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9bb5cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.34a2 2 0 0 1 2-2.18H7a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
-          <a href="tel:+917796904008" style="color:#9bb5cc;">+91 77969 04008</a>
+          <a href="tel:+917276748003" style="color:#9bb5cc;">+91 72767 48003</a>
         </div>
         <div class="footer-contact-item">
           <div class="fi-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9bb5cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
@@ -1119,8 +1384,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2025 Sevasadan Niramay Pvt. Ltd. All rights reserved.</span>
-      <span>Ichalkaranji, Maharashtra, India</span>
+      <span>© 2025 SEVASADAN NIRAMAY PVT. LTD. All rights reserved.</span>
+      <span>691/1, Ring Road, Near Bohara Market, Ichalkaranji, Maharashtra</span>
     </div>
   </div>
 </footer>
@@ -1132,30 +1397,33 @@ const CMS_KEY = 'niramay_data_v3';
 // ─── DEFAULTS (fallback if admin hasn't saved yet) ───────────────────────────
 const CMS_DEFAULTS = {
   hospital:{
-    name:'Sevasadan Niramay Pvt. Ltd.',tagline:'Pvt. Ltd. — Ichalkaranji',
+    name:'SEVASADAN NIRAMAY PVT. LTD.',tagline:'Healthcare With Human Touch',
     badge:'Trusted Healthcare in Ichalkaranji',
     heroTitle:'Your Health is',heroHL:'Our Responsibility',
-    heroDesc:'At Sevasadan Niramay Pvt. Ltd., we deliver quality healthcare with compassion, integrity, and excellence — equipped with modern facilities and a dedicated medical team.',
-    about1:'At Sevasadan Niramay Pvt. Ltd., we are committed to delivering quality healthcare services with compassion, integrity, and excellence. Our hospital is equipped with modern medical facilities and a dedicated team of doctors, nurses, and healthcare professionals.',
-    about2:'We ensure the best possible care for every patient — from routine consultations to specialized treatments and emergency services, all under one roof in Ichalkaranji.',
+    heroDesc:'At SEVASADAN NIRAMAY PVT. LTD., we deliver quality healthcare with compassion, integrity, and excellence — equipped with modern facilities and a dedicated medical team.',
+    about1:'At SEVASADAN NIRAMAY PVT. LTD., we are committed to delivering quality healthcare services with compassion, integrity, and excellence. Our hospital is equipped with modern medical facilities and a dedicated team of doctors, nurses, and healthcare professionals.',
+    about2:'We ensure the best possible care for every patient — from routine consultations to specialized treatments and emergency services, all under one roof at 691/1, Ring Road, Near Bohara Market, Ichalkaranji.',
     mission:'To provide accessible, affordable, and high-quality healthcare services while maintaining the highest standards of medical ethics and patient safety — with compassionate care, modern infrastructure, and a skilled medical team.',
     vision:'To become a trusted and leading healthcare provider in the region, known for excellence in patient care, advanced medical services, and unwavering commitment to community health and well-being.',
-    stats:[{num:'24/7',label:'Emergency Care'},{num:'7+',label:'Hospital Facilities'},{num:'10+',label:'Medical Departments'},{num:'100%',label:'Patient-Centered'}]
+    stats:[{num:'24/7',label:'Emergency Care'},{num:'9+',label:'Specialities'},{num:'10+',label:'Consultant Doctors'},{num:'100%',label:'Patient-Centered'}]
   },
   contact:{
-    phone:'+91 77969 04008',whatsapp:'917796904008',
+    phone:'+91 72767 48003',whatsapp:'917276748003',
     email:'snpl00000@gmail.com',hrdEmail:'hrd.sevasadanniramayhospital.ich@gmail.com',
-    address:'Ichalkaranji, Maharashtra, India',
+    address:'691/1, Ring Road, Near Bohara Market, Ichalkaranji',
     hours:[{day:'Monday – Saturday',time:'9:00 AM – 8:00 PM'},{day:'Sunday',time:'Emergency Only'},{day:'Emergency Services',time:'24/7 Always Open'}]
   },
-  departments:['Cardiology','General Medicine','Urology','Nephrology','Obstetrics & Gynecology','Orthopedics','Pediatrics','Ophthalmology','General Surgery','CVTS','Emergency Care'],
+  departments:['General Medicine','Cardiology','General Surgery','Urology','Ophthalmology','Pediatrics','Emergency & Critical Care','Orthopedic','CVTS'],
   doctors:[
-    {id:1,name:'Dr. Lalit Somani',dept:'Consultant',qual:'',phone:'+91 77969 04008',photo:'Dr.Lalit Somani.jpg',days:'',available:true},
-    {id:2,name:'Dr. Amol Bhore',dept:'Consultant',qual:'',phone:'+91 77969 04008',photo:'Dr.Amol Bhore.jpg',days:'',available:true},
-    {id:3,name:'Dr. Amrutraj Nerlikar',dept:'Orthopedics',qual:'',phone:'+91 77969 04008',photo:'Dr.Amrutraj Nerlikar.jpg',days:'',available:true},
-    {id:4,name:'Dr. Rammohan Yedave',dept:'Consultant',qual:'',phone:'+91 77969 04008',photo:'Dr.Rammohan Yedave.jpg',days:'',available:true},
-    {id:5,name:'Dr. Shivkumar Katti',dept:'Consultant',qual:'',phone:'+91 77969 04008',photo:'Dr.Shivkumar Katti.jpg',days:'',available:true},
-    {id:6,name:'Dr. Rahul Walekar',dept:'Consultant',qual:'',phone:'+91 77969 04008',photo:'Dr.Rahul Walekar.jpg',days:'',available:true}
+    {id:1,name:'Dr. Shivkumar Katti',dept:'General Medicine',qual:'MBBS, MD Medicine',phone:'+91 72767 48003',photo:'Dr.Shivkumar Katti.jpg',days:'',available:true},
+    {id:2,name:'Dr. Rahul Walhekar',dept:'Cardiology',qual:'DNB Cardiology',phone:'+91 72767 48003',photo:'Dr.Rahul Walekar.jpg',days:'',available:true},
+    {id:3,name:'Dr. Amol Bhore',dept:'Cardiology',qual:'MBBS, DrNB (Cardiology)',phone:'+91 72767 48003',photo:'Dr.Amol Bhore.jpg',days:'',available:true},
+    {id:4,name:'Dr. Chetan Shah',dept:'General Surgery / CVTS',qual:'MBBS, MS, MCh, DNB',phone:'+91 72767 48003',photo:'',days:'',available:true},
+    {id:5,name:'Dr. Amrutraj Nerlikar',dept:'Urology',qual:'MBBS, DNB',phone:'+91 72767 48003',photo:'Dr.Amrutraj Nerlikar.jpg',days:'',available:true},
+    {id:6,name:'Dr. Rammohan Yevade',dept:'Emergency & Critical Care',qual:'MBBS, DNB',phone:'+91 72767 48003',photo:'Dr.Rammohan Yedave.jpg',days:'',available:true},
+    {id:7,name:'Dr. Sarang Dhavale',dept:'General Surgery',qual:'MS General Surgery',phone:'+91 72767 48003',photo:'',days:'',available:true},
+    {id:8,name:'Dr. Shruti Bargale',dept:'Ophthalmology',qual:'MBBS, DNB (Ophthalmology)',phone:'+91 72767 48003',photo:'',days:'',available:true},
+    {id:9,name:'Dr. Lalit Somani',dept:'Pediatrics',qual:'MBBS, DCH',phone:'+91 72767 48003',photo:'Dr.Lalit Somani.jpg',days:'',available:true}
   ]
 };
 
@@ -1414,6 +1682,101 @@ document.addEventListener('DOMContentLoaded', () => {
       el.addEventListener('mouseenter', () => { cursor.classList.add('hover'); trail.classList.add('hover'); });
       el.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); trail.classList.remove('hover'); });
     });
+  }
+});
+
+// ─── APPOINTMENT MODAL ────────────────────────────────────────────────────────
+const APPT_KEY = 'niramay_appointments';
+// Replace with your Google Apps Script Web App URL to auto-sync to Google Sheet:
+const GOOGLE_SHEET_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzXjzMnnd-1AeO9HH2Awcfe7V0agwcO12st0TEdVd5VNXNXXNtkKtJDRkVgOlCVnoQd/exec';
+
+function openApptModal() {
+  const overlay = document.getElementById('apptModalOverlay');
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // Reset form view
+  document.getElementById('apptFormWrap').style.display = '';
+  document.getElementById('apptSuccess').style.display = 'none';
+  document.getElementById('apptFormErr').style.display = 'none';
+  // Set min date to today
+  const today = new Date().toISOString().split('T')[0];
+  const dateInput = document.getElementById('af_date');
+  if (dateInput) dateInput.min = today;
+  // Populate department from CMS
+  const cms = getCmsData();
+  const deptSel = document.getElementById('af_dept');
+  if (deptSel && cms.departments && cms.departments.length) {
+    deptSel.innerHTML = '<option value="">Select Department</option>';
+    cms.departments.forEach(d => {
+      const o = document.createElement('option');
+      o.textContent = d; o.value = d;
+      deptSel.appendChild(o);
+    });
+  }
+}
+
+function closeApptModal(e) {
+  if (e && e.target !== document.getElementById('apptModalOverlay')) return;
+  document.getElementById('apptModalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function submitAppt() {
+  const name  = document.getElementById('af_name').value.trim();
+  const phone = document.getElementById('af_phone').value.trim();
+  const dept  = document.getElementById('af_dept').value;
+  const date  = document.getElementById('af_date').value;
+  const errEl = document.getElementById('apptFormErr');
+
+  if (!name || !phone || !dept || !date) {
+    errEl.textContent = 'Please fill in Name, Phone, Department and Preferred Date.';
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+
+  const appt = {
+    id:        'APT-' + Date.now(),
+    timestamp: new Date().toISOString(),
+    name, phone,
+    email:   document.getElementById('af_email').value.trim(),
+    dept, date,
+    time:    document.getElementById('af_time').value,
+    message: document.getElementById('af_msg').value.trim(),
+    status:  'Pending'
+  };
+
+  // Save to localStorage
+  const existing = JSON.parse(localStorage.getItem(APPT_KEY) || '[]');
+  existing.unshift(appt);
+  localStorage.setItem(APPT_KEY, JSON.stringify(existing));
+
+  // Sync to Google Sheet via Webhook (if URL provided)
+  if (GOOGLE_SHEET_SCRIPT_URL) {
+    fetch(GOOGLE_SHEET_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(appt)
+    }).catch(err => console.error('Sheet Sync Error:', err));
+  }
+
+  // Clear form
+  ['af_name','af_phone','af_email','af_dept','af_date','af_time','af_msg'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+
+  // Show success
+  document.getElementById('apptFormWrap').style.display = 'none';
+  document.getElementById('apptSuccess').style.display = 'block';
+}
+
+// Close modal on Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.getElementById('apptModalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
   }
 });
 </script>
